@@ -29,4 +29,19 @@ $("#submit").on("click", function(event) {
 
 
 
+/////  **** open cage api *** ///////////////
+// var openCageKey = "690453a113264701806396693c84ed17"
 
+// // Opencage data geocoding -> takes in a city or place name and spits out the lat and long (we need this for our weather functionality)
+// // ajax call to open cage
+// function openCageAjax(){
+//     var openCageQueryUrl = "https://api.opencagedata.com/geocode/v1/json?q="+ openCagePlace +"&key=690453a113264701806396693c84ed17"
+//     $.ajax({
+//         method: 'GET',
+//         url: openCageQueryUrl
+//     }).then(function(response) {
+       
+//         console.log(response);
+//         console.log(response.geomotry)
+//     })
+// }
