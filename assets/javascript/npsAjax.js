@@ -6,10 +6,12 @@ var campQueryParams = {
     "api_key": "IvDm5VJctJF8OHMsxVyrHXjVShQNgrTwYSbzQrYJ",
 }
 
+var amenitiesArray = []
 
-
-campQueryParams.q = $("#location").val().trim() || '';
-// campQueryParams.field = I'm not sure how to grab the checked radio buttons vs unchecked, but we'll add any checked radio buttons to an array.  We may have to add a data-value or some other attribute to capture the specific buttons
+campQueryParams.q = $("#location").val().trim();
+campQueryParams.limit = $("limit-results").val();
+//amenitiesArray.push = 
+// campQueryParams.field = I'm not sure how to grab the checked boxes vs unchecked, but we'll add any checked radio buttons to an array.  We may have to add a data-value or some other attribute to capture the specific buttons
 
 var campgroundUrl = "https://developer.nps.gov/api/v1/campgrounds?" + campQueryParams
 
