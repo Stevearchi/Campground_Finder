@@ -30,10 +30,100 @@
             </div>
     </div>
 </header>
-
+<br>
 <div class="container">
     <div class="row">
-        <div class="col-xs-12 col-md-8 border border-primary rounded" id="display-campsites">
+        <div class="col-xs-12 col-sm-4 col-md-3 border-top border-primary rounded" id="search-card">
+                <div class="row search-heading bg-primary text-white">
+                    <div class="col-md-12">
+                        <h5>Search For Campgrounds</h5>
+                    </div>
+                </div>
+                <div class="row border-left border-right border-primary">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                                <label class="col-form-label" for="inputLocation" id="search-label">Enter national park name:</label>
+                                <input type="text" class="form-control text-primary" placeholder="i.e. Zion National Park" id="location">
+                        </div>                
+                    </div>
+                </div>
+                <div class="row border-left border-right border-primary">
+                        <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-form-label col-form-label-sm" for="inputDate" id="search-label">Start Date:</label>
+                                    <input class="form-control form-control-sm text-primary" type="text" placeholder="MM/DD/YYYY" id="start-date">
+                                </div>                
+                        </div>
+                        <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-form-label col-form-label-sm" for="inputDate" id="search-label">End Date:</label>
+                                    <input class="form-control form-control-sm text-primary" type="text" placeholder="MM/DD/YYYY" id="end-date">
+                                </div>                
+                        </div>
+                </div>
+                <!-- <br class="border-left border-right border-primary"> -->
+                <div class="row border-left border-right border-primary">
+                    <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" data-check="false" id="showers">
+                                    <label class="custom-control-label" for="showers">Showers&nbsp;&nbsp;<i class="fas fa-shower"></i></label>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" data-check="false" id="toilets">
+                                    <label class="custom-control-label" for="toilets">Toilets&nbsp;&nbsp;<i class="fas fa-toilet"></i></label>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <div class="row border-left border-right border-primary">
+                    <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" data-check="false" id="trash">
+                                    <label class="custom-control-label" for="trash">Trash Collection&nbsp;&nbsp;<i class="fas fa-trash-alt"></i></label>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" data-check="false" id="foodStorage">
+                                    <label class="custom-control-label" for="foodStorage">Food Storage&nbsp;&nbsp;<i class="fas fa-door-closed"></i></label>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <div class="row border-left border-right border-primary">
+                    <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" data-check="false" id="water">
+                                    <label class="custom-control-label" for="water">Potable Water&nbsp;&nbsp;<i class="fas fa-tint"></i></label>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" data-check="false" id="firewood">
+                                    <label class="custom-control-label" for="firewood">Firewood Avaible&nbsp;&nbsp;<i class="fas fa-fire"></i></label>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <div class="row border-left border-right border-primary">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+                    </div>
+                </div>
+                <div class="row border-bottom border-primary"></div>
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-8 offset-md-1 border border-primary rounded" id="display-campsites">
             <div class="row">
                 <div class="col-md-6">
                         <br>
@@ -58,114 +148,20 @@
                             <a href="#"><p class="text-center">Campground Name</p></a>                
                     </div>
             </div>
-        </div>
-        <div class="col-xs-12 col-md-3 offset-md-1 border border-primary rounded" id="search-card">
-            <div class="row search-heading bg-primary text-white">
-                <div class="col-md-12">
-                    <h5>Search For Campgrounds</h5>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                            <label class="col-form-label" for="inputLocation">Enter location:</label>
-                            <input type="text" class="form-control" placeholder="i.e. Zion National Park, or Utah" id="location">
-                    </div>                
-                </div>
-            </div>
             <div class="row">
                     <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-form-label col-form-label-sm" for="inputDate">Start Date:</label>
-                                <input class="form-control form-control-sm" type="text" placeholder="MM/DD/YYYY" id="start-date">
-                            </div>                
+                            <br>
+                            <img src="https://draftin.com/images/52400?token=LUnMCVLjXimJAKVv7GSI-0zRRaBkkN0SPUYgk9GZwnkyxMNBrqHtXdp7QaHUheNKSs5VMnCP8mRuzfBtw9u5Jes" alt="placeholder" class="border border-secondary rounded mx-auto d-block">
+                            <a href="#"><p class="text-center">Campground Name</p></a>
                     </div>
                     <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-form-label col-form-label-sm" for="inputDate">End Date:</label>
-                                <input class="form-control form-control-sm" type="text" placeholder="MM/DD/YYYY" id="end-date">
-                            </div>                
+                            <br>
+                            <img src="https://draftin.com/images/52400?token=LUnMCVLjXimJAKVv7GSI-0zRRaBkkN0SPUYgk9GZwnkyxMNBrqHtXdp7QaHUheNKSs5VMnCP8mRuzfBtw9u5Jes" alt="placeholder" class="border border-secondary rounded mx-auto d-block">
+                            <a href="#"><p class="text-center">Campground Name</p></a>                
                     </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                            <label for="searchResults">Limit search results to:</label>
-                            <select class="form-control" id="limit-results">
-                                <option id="limit-5">5</option>
-                                <option id="limit-10">10</option>
-                                <option id="limit-15">15</option>
-                                <option id="limit-20">20</option>
-                            </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                        <!-- <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                <label class="form-check-label" for="defaultCheck1">
-                                  Default checkbox
-                                </label>
-                        </div> -->
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" value="" id="showers">
-                                <label class="custom-control-label" for="showers">Showers&nbsp;&nbsp;<i class="fas fa-shower"></i></label>
-                            </div>
-                        </div>
-                </div>
-                <div class="col-md-6">
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="toilets">
-                                <label class="custom-control-label" for="toilets">Toilets&nbsp;&nbsp;<i class="fas fa-toilet"></i></label>
-                            </div>
-                        </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="trash">
-                                <label class="custom-control-label" for="trash">Trash Collection&nbsp;&nbsp;<i class="fas fa-trash-alt"></i></label>
-                            </div>
-                        </div>
-                </div>
-                <div class="col-md-6">
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="foodStorage">
-                                <label class="custom-control-label" for="foodStorage">Food Storage&nbsp;&nbsp;<i class="fas fa-door-closed"></i></label>
-                            </div>
-                        </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="water">
-                                <label class="custom-control-label" for="water">Potable Water&nbsp;&nbsp;<i class="fas fa-tint"></i></label>
-                            </div>
-                        </div>
-                </div>
-                <div class="col-md-6">
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="firewood">
-                                <label class="custom-control-label" for="firewood">Firewood Avaible&nbsp;&nbsp;<i class="fas fa-fire"></i></label>
-                            </div>
-                        </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary" id="submit">Submit</button>
-                </div>
             </div>
         </div>
+
     </div>
 </div>
 <br>
