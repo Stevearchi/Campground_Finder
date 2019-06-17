@@ -1,9 +1,20 @@
+.jumbotron {
+    background-image: url("../images/header.jpg");
+    background-size: cover;
+    height: 400px;
+}
+
+.header {
+    background: rgba(255,255,255,0.40);
+}
+
 h5 {
     padding: 10px;
 }
 
 h1 {
     font-family: 'Adamina', serif;
+    padding-top: 20px;
 }
 
 #display-campsites a {
@@ -15,6 +26,20 @@ h1 {
     margin-bottom: 10px;
 }
 
+@media screen and (max-width: 986px) {
+    label {
+        font-size: 11px;
+    }
+
+    #search-label{
+        font-size: 11px;
+    }
+
+    ::placeholder {
+        font-size: 11px;
+    }
+}
+
 @media screen and (max-width: 768px) {
 
     label {
@@ -24,4 +49,20 @@ h1 {
     #search-label{
         font-size: 11px;
     }
-  }
+
+    .search-card-border {
+        border-right: none;
+    }
+}
+
+@media screen and (max-width: 512px) {
+
+    #jumbo-title {
+        font-size: 70px;
+    }
+
+    #jumbo-lead {
+        font-size: 15px;
+    }
+
+}

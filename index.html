@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Reset CSS File-->
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-    <!-- Reset CSS File-->
+    <!-- CSS Override File-->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <!-- Font Awesome Link -->
     <script src="https://kit.fontawesome.com/fd64f95310.js"></script>
@@ -22,10 +22,10 @@
 <body>
 
 <header>
-    <div class="jumbotron jumbotron-fluid bg-primary text-white border border-light rounded">
-            <div class="container">
-                <h1 class="display-2">Our Site Name Here</h1>
-                <p class="lead">This is for our site description so that the user knows what to do.</p>
+    <div class="jumbotron jumbotron-fluid text-primary text-center border border-primary rounded">
+            <div class="container header">
+                <h1 class="display-2" id="jumbo-title">Our Site Name Here</h1>
+                <p class="lead" id="jumbo-lead">This is for our site description so that the user knows what to do.</p>
             </div>
     </div>
 </header>
@@ -38,7 +38,7 @@
                         <h5>Search For Campgrounds</h5>
                     </div>
                 </div>
-                <div class="row border-left border-right border-primary">
+                <div class="row border-left border-right border-primary search-card-border">
                     <div class="col-md-12">
                         <div class="form-group">
                                 <label class="col-form-label" for="inputLocation" id="search-label">Enter national park name:</label>
@@ -46,7 +46,7 @@
                         </div>                
                     </div>
                 </div>
-                <div class="row border-left border-right border-primary">
+                <div class="row border-left border-right border-primary search-card-border">
                         <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="col-form-label col-form-label-sm" for="inputDate" id="search-label">Start Date:</label>
@@ -60,8 +60,7 @@
                                 </div>                
                         </div>
                 </div>
-                <!-- <br class="border-left border-right border-primary"> -->
-                <div class="row border-left border-right border-primary">
+                <div class="row border-left border-right border-primary search-card-border">
                     <div class="col-md-6">
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
@@ -79,7 +78,7 @@
                             </div>
                     </div>
                 </div>
-                <div class="row border-left border-right border-primary">
+                <div class="row border-left border-right border-primary search-card-border">
                     <div class="col-md-6">
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
@@ -97,7 +96,7 @@
                             </div>
                     </div>
                 </div>
-                <div class="row border-left border-right border-primary">
+                <div class="row border-left border-right border-primary search-card-border">
                     <div class="col-md-6">
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
@@ -115,7 +114,7 @@
                             </div>
                     </div>
                 </div>
-                <div class="row border-left border-right border-primary">
+                <div class="row border-left border-right border-primary search-card-border">
                     <div class="col-md-12">
                         <button type="submit" class="btn btn-primary" id="submit">Submit</button>
                     </div>
@@ -166,6 +165,6 @@
 <br>
 <br>
     <!-- Our JS File -->
-    <script src="/assets/javascript/script.js"></script>
+    <script src="assets/javascript/logic.js"></script>
 </body>
 </html>
