@@ -10,3 +10,18 @@ h1 {
     text-decoration: none;
     color: darkslategrey;
 }
+
+#submit {
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 768px) {
+
+    label {
+        font-size: 11px;
+    }
+
+    #search-label{
+        font-size: 11px;
+    }
+  }
