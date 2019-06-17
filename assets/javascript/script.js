@@ -6,7 +6,9 @@ var campQueryParams = {
     "api_key": "IvDm5VJctJF8OHMsxVyrHXjVShQNgrTwYSbzQrYJ",
 }
 
-campQueryParams.q = $("#location").val().trim();
+
+
+campQueryParams.q = $("#location").val().trim() || '';
 // campQueryParams.field = I'm not sure how to grab the checked radio buttons vs unchecked, but we'll add any checked radio buttons to an array.  We may have to add a data-value or some other attribute to capture the specific buttons
 
 var campgroundUrl = "https://developer.nps.gov/api/v1/campgrounds?" + campQueryParams
@@ -14,9 +16,9 @@ var campgroundUrl = "https://developer.nps.gov/api/v1/campgrounds?" + campQueryP
 
 // Opencage data geocoding -> takes in a city or place name and spits out the lat and long (we need this for our weather functionality)
 
-var opencageKey = "690453a113264701806396693c84ed17"
-var opencagePlace = $("location").val().trim()
-var opencageQueryUrl = "https://api.opencagedata.com/geocode/v1/json?q="+ opencagePlace +"&key=690453a113264701806396693c84ed17"
+var openCageKey = "690453a113264701806396693c84ed17"
+var openCagePlace = $("#location").val().trim();
+var openCageQueryUrl = "https://api.opencagedata.com/geocode/v1/json?q="+ openCagePlace +"&key=690453a113264701806396693c84ed17"
 
 
 
@@ -24,7 +26,12 @@ var opencageQueryUrl = "https://api.opencagedata.com/geocode/v1/json?q="+ openca
 var darkskyKey = "24ad87e96d744bd3fb31284ccc8763a1"
 var weatherUrl = "https://api.darksky.net/forecast/" + darkskyKey + "/[latitude],[longitude],[time]"
 
+//nathional park campground ajax call
+$.ajax({
+    method: 'GET',
+    url: openCageQueryUrl
+}).then(function() {
 
+});
 
-
-
+//
