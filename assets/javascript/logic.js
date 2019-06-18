@@ -12,29 +12,44 @@ var campQueryParams = {
 
 var amenitiesArray = []
 
-campQueryParams.q = $("#location").val().trim();
-campQueryParams.limit = $("limit-results").val();
-//amenitiesArray.push = 
-// campQueryParams.field = I'm not sure how to grab the checked boxes vs unchecked, but we'll add any checked radio buttons to an array.  We may have to add a data-value or some other attribute to capture the specific buttons
-
-var campgroundUrl = "https://developer.nps.gov/api/v1/campgrounds?" + campQueryParams;
 
 
 
 
+// function for weather api ajax call
+function getWeather(lat, long, date) {
+latLongString =lat + "," + long + "," + date;
+$.ajax({
+    method: 'GET',
+    url: weatherUrl
+}).then(function (response){
 
+})
+}
 
-$('#submit').on('click', function (event){
+$('#submit').on('click', function (event) {
     event.preventDefault();
+    campQueryParams.q = $("#location").val().trim();
+    //campQueryParams.limit = $("limit-results").val();
+    var campgroundUrl = "https://developer.nps.gov/api/v1/campgrounds?" + $.param(campQueryParams);
+    startDate = $('#start-date').val().trim();
+    startMoment = moment(startDate, 'MM/DD/YYYY');
+    endDate = $('#end-date').val().trim();
+    
     $.ajax({
         method: 'GET',
         url: campgroundUrl
-    }).then(function() {
-    
-     });
-    
-// clear out values
-//$('#location').val('');
+    }).then(function (response) {
+        //loop through each campground
+        for (var i = 0; i < response.data.length; i++) {
+            console.log(response.data[i].latLong)
+        
+        }
+        getWeather(latLong.lat, latLong.long, startDate);
+    });
+
+    // clear out values
+    //$('#location').val('');
 
 });
 
@@ -55,7 +70,7 @@ $('#submit').on('click', function (event){
 //         method: 'GET',
 //         url: openCageQueryUrl
 //     }).then(function(response) {
-       
+
 //         console.log(response);
 //         console.log(response.geomotry)
 //     })
