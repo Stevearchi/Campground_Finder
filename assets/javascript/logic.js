@@ -1,5 +1,5 @@
 var amenitiesArray = [];
-
+$("#display-campsites").hide();
 $(".custom-control-input").on("click", function() {
   console.log($(this).attr("data-check"));
   if ($(this).attr("data-check") === "false") {
@@ -9,11 +9,14 @@ $(".custom-control-input").on("click", function() {
   }
 });
 var parkCode;
-var parkLatLong;``
+var parkLatLong;
+
 
 $("#submit").on("click", function(event) {
   event.preventDefault();
-  var amenitiesArray = [];
+  console.log('in on submit');
+  
+  // var amenitiesArray = [];
   if ($("#showers").attr("data-check") === "true") {
     amenitiesArray.push($("#showers").attr("id"));
   }
@@ -40,44 +43,86 @@ $("#submit").on("click", function(event) {
   // campQueryParams.q = $("#location")
   //   .val()
   //   .trim();
-//   campQueryParams.fields = JSON.stringify(amenitiesArray);
+  //   campQueryParams.fields = JSON.stringify(amenitiesArray);
 
   // console.log(campQueryParams);
-// can't get the amenities array to function properly in the URL, but since they don't really functionally change the search results i think that's ok
-  
-var parkName = $("#location").val().trim()
+  // can't get the amenities array to function properly in the URL, but since they don't really functionally change the search results i think that's ok
 
-var parkUrl = "https://developer.nps.gov/api/v1/parks?api_key=IvDm5VJctJF8OHMsxVyrHXjVShQNgrTwYSbzQrYJ&q=" + parkName
-$.ajax({
-  url: parkUrl,
-  method: "GET",
-}).then(function (response) {
-  var parkResults = response.data[0];
-  parkCode = parkResults.parkCode;
-  parkLatLong = parkResults.latLong;
-  console.log(parkResults)
-  console.log(parkCode, parkLatLong)
-  campground();
-})
+  var parkName = $("#location")
+    .val()
+    .trim();
 
-});
+  var parkUrl =
+    "https://developer.nps.gov/api/v1/parks?api_key=IvDm5VJctJF8OHMsxVyrHXjVShQNgrTwYSbzQrYJ&q=" +
+    parkName;
+  $.ajax({
+    url: parkUrl,
+    method: "GET"
+  }).then(function(response) {
+    var parkResults = response.data[0];
+    parkCode = parkResults.parkCode;
+    parkLatLong = parkResults.latLong;
+    campground();
+  }).then(function (){
+    var campgroundUrl =
+    "https://developer.nps.gov/api/v1/campgrounds?api_key=IvDm5VJctJF8OHMsxVyrHXjVShQNgrTwYSbzQrYJ&parkCode=" +
+    parkCode;
 
-function campground () {
-var campgroundUrl =
-    "https://developer.nps.gov/api/v1/campgrounds?api_key=IvDm5VJctJF8OHMsxVyrHXjVShQNgrTwYSbzQrYJ&parkCode=" + parkCode;
-
-    $.ajax({
-      url: campgroundUrl,
-      method: "GET"
-    }).then(function(response) {
-      var campResults = response.data;
-      console.log(campResults)
-      var campgroundName = response.name
-      var campgroundOne = $("<div>").addClass("ajaxResponse col-md-6").text(campgroundName)
-      
-      console.log(campgroundOne)
-    })
-  };
+  $.ajax({
+    url: campgroundUrl,
+    method: "GET"
+  }).then(function(response) {
+    var campResults = response.data;
+    console.log(campResults);
     
+    console.log(campResults.length);
+    for (var i = 0; i < campResults.length; i++) {
+      var campgroundName = campResults[i].name;
+      var campgroundDescription = campResults[i].description;
+      var campgroundInfoUrl = campResults[i].regulationsurl;
+      var campgroundDirections = campResults[i].directionsUrl;
+      $("#display-campsites").show();
+      var informationButton = $("<a href=" + campgroundInfoUrl + " target='_blank'> Information </a>").addClass("btn btn-primary");
+      var directionsButton = $("<a href=" + campgroundDirections + " target='_blank'> Directions </a>").addClass("btn btn-primary");
+      var campsite = $("<div>").addClass("ajaxResponse col-md-12 border-bottom border-primary");
+      campsite.append("<h2>" + campgroundName + "</h2>")
+      campsite.append("<p> Brief campground description: " + campgroundDescription + "</p>");
+      campsite.append(directionsButton, informationButton);
+      $("#append-here").append(campsite);
+    }
+  });
+  
+})})
 
+function campground() {
+  console.log('in campground');
+  
+  var campgroundUrl =
+    "https://developer.nps.gov/api/v1/campgrounds?api_key=IvDm5VJctJF8OHMsxVyrHXjVShQNgrTwYSbzQrYJ&parkCode=" +
+    parkCode;
 
+  $.ajax({
+    url: campgroundUrl,
+    method: "GET"
+  }).then(function(response) {
+    var campResults = response.data;
+    console.log(campResults);
+    
+    console.log(campResults.length);
+    for (var i = 0; i < campResults.length; i++) {
+      var campgroundName = campResults[i].name;
+      var campgroundDescription = campResults[i].description;
+      var campgroundInfoUrl = campResults[i].regulationsurl;
+      var campgroundDirections = campResults[i].directionsUrl;
+      $("#display-campsites").show();
+      var informationButton = $("<a href=" + campgroundInfoUrl + " target='_blank'> Information </a>").addClass("btn btn-primary");
+      var directionsButton = $("<a href=" + campgroundDirections + " target='_blank'> Directions </a>").addClass("btn btn-primary");
+      var campsite = $("<div>").addClass("ajaxResponse col-md-12 border-bottom border-primary");
+      campsite.append("<h2>" + campgroundName + "</h2>")
+      campsite.append("<p> Brief campground description: " + campgroundDescription + "</p>");
+      campsite.append(directionsButton, informationButton);
+      $("#append-here").append(campsite);
+    }
+    // append these divs to soon to be created row
+  });
+}
