@@ -1,7 +1,7 @@
 var amenitiesArray = [];
 $("#display-campsites").hide();
 $(".custom-control-input").on("click", function () {
-  console.log($(this).attr("data-check"));
+ // console.log($(this).attr("data-check"));
   if ($(this).attr("data-check") === "false") {
     $(this).attr("data-check", "true");
   } else {
@@ -51,12 +51,13 @@ $("#submit").on("click", function (event) {
     parkCode = parkResults.parkCode;
     parkLatLong = parkResults.latLong;
     campground();
+    getWeather(parkLatLong);
   })
 
 });
 
 function campground() {
-  console.log('in campground');
+  //console.log('in campground');
 
   var campgroundUrl =
     "https://developer.nps.gov/api/v1/campgrounds?api_key=IvDm5VJctJF8OHMsxVyrHXjVShQNgrTwYSbzQrYJ&parkCode=" +
@@ -67,13 +68,10 @@ function campground() {
     method: "GET"
   }).then(function (response) {
     var campResults = response.data;
-    console.log(campResults);
-    
-   
     for (var i = 0; i < campResults.length; i++) {
       $("#display-campsites").show();
       var campgroundName = campResults[i].name;
-      campgroundName = campgroundName.replace(/\s+g, '');
+      campgroundName = campgroundName.replace(/\s+/g, '-');
       var campgroundDescription = campResults[i].description;
       var campgroundInfoUrl = campResults[i].regulationsurl;
       var campgroundDirections = campResults[i].directionsUrl;
@@ -102,19 +100,34 @@ $("#reset").on("click", function() {
 
 
 
-function getWeather(lat, long, date) {
-  latLongString = lat + "," + long + "," + date;
-  startDate = $('#start-date').val().trim();
-  startMoment = moment(startDate, 'MM/DD/YYYY');
-  endDate = $('#end-date').val().trim();
+function getWeather(parkLatLong) {
+
+  var latLongArray = parkLatLong.split(/[:,]+/g);
+  var startDate = $('#start-date').val().trim();
+
+  var startMoment = moment(startDate, 'YYYY-DD-MM');
+
+  var endDate = $('#end-date').val().trim();
+  var endMoment = moment(endDate, 'YYYY-DD-MM');
+
+  var dateRange = startMoment.diff(endMoment, 'days')
+  var latLongString = '/' + latLongArray[1] + "," + latLongArray[3];
   var darkskyKey = "24ad87e96d744bd3fb31284ccc8763a1"
-  var weatherUrl = "https://api.darksky.net/forecast/" + darkskyKey + "/[latitude],[longitude],[time]"
+  var weatherUrl = "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/" + darkskyKey + latLongString;
+ console.log(dateRange)
   // clear out values
   //$('#location').val('');
-  $.ajax({
-    method: 'GET',
-    url: weatherUrl
-  }).then(function (response) {
+  for(var i = 0; i < dateRange; i++){
 
-  });
+    $.ajax({
+      method: 'GET',
+      url: weatherUrl
+    }).then(function (response) {
+      var high = response.daily.data[0].temperatureHigh;
+      var low = response.daily.data[0].temperatureLow;
+      var precip = response.daily.data[0].precipProbability;
+      var wind = response.daily.data[0].windSpeed;
+      
+    });
+  }
 }
