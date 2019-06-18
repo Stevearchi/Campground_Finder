@@ -1,6 +1,6 @@
 var amenitiesArray = [];
 $("#display-campsites").hide();
-$(".custom-control-input").on("click", function() {
+$(".custom-control-input").on("click", function () {
   console.log($(this).attr("data-check"));
   if ($(this).attr("data-check") === "false") {
     $(this).attr("data-check", "true");
@@ -12,11 +12,9 @@ var parkCode;
 var parkLatLong;
 
 
-$("#submit").on("click", function(event) {
+$("#submit").on("click", function (event) {
   event.preventDefault();
-  console.log('in on submit');
-  
-  // var amenitiesArray = [];
+
   if ($("#showers").attr("data-check") === "true") {
     amenitiesArray.push($("#showers").attr("id"));
   }
@@ -48,18 +46,18 @@ $("#submit").on("click", function(event) {
   $.ajax({
     url: parkUrl,
     method: "GET"
-  }).then(function(response) {
+  }).then(function (response) {
     var parkResults = response.data[0];
     parkCode = parkResults.parkCode;
     parkLatLong = parkResults.latLong;
     campground();
   })
-  
-})
+
+});
 
 function campground() {
   console.log('in campground');
-  
+
   var campgroundUrl =
     "https://developer.nps.gov/api/v1/campgrounds?api_key=IvDm5VJctJF8OHMsxVyrHXjVShQNgrTwYSbzQrYJ&parkCode=" +
     parkCode;
@@ -67,7 +65,7 @@ function campground() {
   $.ajax({
     url: campgroundUrl,
     method: "GET"
-  }).then(function(response) {
+  }).then(function (response) {
     var campResults = response.data;
     console.log(campResults);
     
@@ -101,3 +99,22 @@ $("#reset").on("click", function() {
   $("#display-campsites").hide();
   
 });
+
+
+
+function getWeather(lat, long, date) {
+  latLongString = lat + "," + long + "," + date;
+  startDate = $('#start-date').val().trim();
+  startMoment = moment(startDate, 'MM/DD/YYYY');
+  endDate = $('#end-date').val().trim();
+  var darkskyKey = "24ad87e96d744bd3fb31284ccc8763a1"
+  var weatherUrl = "https://api.darksky.net/forecast/" + darkskyKey + "/[latitude],[longitude],[time]"
+  // clear out values
+  //$('#location').val('');
+  $.ajax({
+    method: 'GET',
+    url: weatherUrl
+  }).then(function (response) {
+
+  });
+}
