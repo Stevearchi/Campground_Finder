@@ -71,15 +71,19 @@ function campground() {
     var campResults = response.data;
     console.log(campResults);
     
-    console.log(campResults.length);
+   
     for (var i = 0; i < campResults.length; i++) {
       $("#display-campsites").show();
       var campgroundName = campResults[i].name;
+      campgroundName = campgroundName.replace(/\s+g, '');
       var campgroundDescription = campResults[i].description;
       var campgroundInfoUrl = campResults[i].regulationsurl;
       var campgroundDirections = campResults[i].directionsUrl;
-      if (campground)
-      var informationButton = $("<a href=" + campgroundInfoUrl + " target='_blank'> Information </a>").addClass("btn btn-primary");
+      //
+      var informationButton = $("<a href='https://www.nps.gov/zion/planyourvisit/" + campgroundName +".htm' target='_blank'> Information </a>").addClass("btn btn-primary");
+      // south-campground.htm
+      // " + campgroundInfoUrl + " target='_blank'> Information </a>").addClass("btn btn-primary");
+      //
       var directionsButton = $("<a href=" + campgroundDirections + " target='_blank'> Directions </a>").addClass("btn btn-primary");
       var campsite = $("<div>").addClass("ajaxResponse col-md-12 border-bottom border-primary");
       campsite.append("<h2>" + campgroundName + "</h2>")
