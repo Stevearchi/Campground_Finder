@@ -1,47 +1,54 @@
-var campQueryParams = {
-    "api_key": "IvDm5VJctJF8OHMsxVyrHXjVShQNgrTwYSbzQrYJ",
-};
-
 var amenitiesArray = [];
 
-campQueryParams.q = $("#location").val().trim();
-campQueryParams.limit = $("limit-results").val();
-amenitiesArray.push($("#showers").prop("checked", true));
-amenitiesArray.push($("#toilets").prop("checked", true));
-amenitiesArray.push($("#trash").prop("checked", true));
-amenitiesArray.push($("#foodStorage").prop("checked", true));
-amenitiesArray.push($("#water").prop("checked", true));
-amenitiesArray.push($("#firewood").prop("checked", true));
-
-
-
-var campgroundUrl = "https://developer.nps.gov/api/v1/campgrounds?" + campQueryParams
-
-    
+$(".custom-control-input").on("click", function() {
+  console.log($(this).attr("data-check"));
+  if ($(this).attr("data-check") === "false") {
+    $(this).attr("data-check", "true");
+  } else {
+    $(this).attr("data-check", "false");
+  }
+});
 
 $("#submit").on("click", function(event) {
-    event.preventDefault();
-    console.log(amenitiesArray)
-    console.log($("#showers"))
-})
+  event.preventDefault();
+  var amenitiesArray = [];
+  if ($("#showers").attr("data-check") === "true") {
+    amenitiesArray.push($("#showers").attr("id"));
+  }
+  if ($("#toilets").attr("data-check") === "true") {
+    amenitiesArray.push($("#toilets").attr("id"));
+  }
+  if ($("#trash").attr("data-check") === "true") {
+    amenitiesArray.push($("#trash").attr("id"));
+  }
+  if ($("#foodStorage").attr("data-check") === "true") {
+    amenitiesArray.push($("#foodStorage").attr("id"));
+  }
+  if ($("#water").attr("data-check") === "true") {
+    amenitiesArray.push($("#water").attr("id"));
+  }
+  if ($("#firewood").attr("data-check") === "true") {
+    amenitiesArray.push($("#firewood").attr("id"));
+  }
 
+  var campQueryParams = {
+    api_key: "IvDm5VJctJF8OHMsxVyrHXjVShQNgrTwYSbzQrYJ"
+  };
 
+  campQueryParams.q = $("#location")
+    .val()
+    .trim();
+//   campQueryParams.fields = JSON.stringify(amenitiesArray);
 
+  console.log(campQueryParams);
+// can't get the amenities array to function properly in the URL, but since they don't really functionally change the search results i think that's ok
+  campgroundUrl =
+    "https://developer.nps.gov/api/v1/campgrounds?" + $.param(campQueryParams);
 
-
-/////  **** open cage api *** ///////////////
-// var openCageKey = "690453a113264701806396693c84ed17"
-
-// // Opencage data geocoding -> takes in a city or place name and spits out the lat and long (we need this for our weather functionality)
-// // ajax call to open cage
-// function openCageAjax(){
-//     var openCageQueryUrl = "https://api.opencagedata.com/geocode/v1/json?q="+ openCagePlace +"&key=690453a113264701806396693c84ed17"
-//     $.ajax({
-//         method: 'GET',
-//         url: openCageQueryUrl
-//     }).then(function(response) {
-       
-//         console.log(response);
-//         console.log(response.geomotry)
-//     })
-// }
+    $.ajax({
+      url: campgroundUrl,
+      method: "GET"
+    }).then(function(response) {
+      var results = response.data;
+    })
+});
