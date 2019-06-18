@@ -42,13 +42,32 @@ $("#submit").on("click", function(event) {
 
   console.log(campQueryParams);
 // can't get the amenities array to function properly in the URL, but since they don't really functionally change the search results i think that's ok
-  campgroundUrl =
+  
+var parkName = $("#location").val().trim()
+
+var parkUrl = "https://developer.nps.gov/api/v1/parks?api_key=IvDm5VJctJF8OHMsxVyrHXjVShQNgrTwYSbzQrYJ" + parkName
+
+$.ajax({
+  url: parkUrl,
+  method: "GET",
+}).then(function (response) {
+  var parkResults = response.data;
+  var parkCode = parkResults.parkCode
+  campQueryParams.parkCode = parkCode;
+  console.log(campQueryParams)
+})
+
+
+ 
+var campgroundUrl =
     "https://developer.nps.gov/api/v1/campgrounds?" + $.param(campQueryParams);
 
     $.ajax({
       url: campgroundUrl,
       method: "GET"
     }).then(function(response) {
-      var results = response.data;
+      var campResults = response.data;
+      console.log(campResults)
+
     })
 });
