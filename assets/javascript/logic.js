@@ -45,7 +45,7 @@ $("#submit").on("click", function(event) {
   
 var parkName = $("#location").val().trim()
 
-var parkUrl = "https://developer.nps.gov/api/v1/parks?api_key=IvDm5VJctJF8OHMsxVyrHXjVShQNgrTwYSbzQrYJ" + parkName
+var parkUrl = "https://developer.nps.gov/api/v1/parks?api_key=IvDm5VJctJF8OHMsxVyrHXjVShQNgrTwYSbzQrYJ&q=" + parkName
 
 $.ajax({
   url: parkUrl,
@@ -54,7 +54,7 @@ $.ajax({
   var parkResults = response.data;
   var parkCode = parkResults.parkCode
   campQueryParams.parkCode = parkCode;
-  console.log(campQueryParams)
+  console.log("campQueryParams: ", campQueryParams)
 })
 
 
