@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Reset CSS File-->
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-    <!-- Reset CSS File-->
+    <!-- CSS Override File-->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <!-- Font Awesome Link -->
     <script src="https://kit.fontawesome.com/fd64f95310.js"></script>
@@ -22,47 +22,61 @@
 
 <body>
 
+<!-- Jumbotron with responsive image as background-->
 <header>
-    <div class="jumbotron jumbotron-fluid bg-primary text-white border border-light rounded">
-            <div class="container">
-                <h1 class="display-2">Our Site Name Here</h1>
-                <p class="lead">This is for our site description so that the user knows what to do.</p>
+    <div class="jumbotron jumbotron-fluid text-primary text-center border border-primary rounded">
+            <div class="container header">
+                <h1 class="display-2" id="jumbo-title">Our Site Name Here</h1>
+                <p class="lead" id="jumbo-lead">This is for our site description so that the user knows what to do.</p>
             </div>
     </div>
 </header>
 <br>
+
+<!-- Page content container-->
 <div class="container">
     <div class="row">
-        <div class="col-xs-12 col-sm-4 col-md-3 border-top border-primary rounded" id="search-card">
-                <div class="row search-heading bg-primary text-white">
-                    <div class="col-md-12">
+
+    <!-- Search Card -->
+        <div class="col-xs-12 col-sm-4 col-md-3" id="search-card">
+        
+        <!-- Search Card Title-->
+                <div class="row">
+                    <div class="col-md-12 search-heading bg-primary text-white border-top border-primary rounded">
                         <h5>Search For Campgrounds</h5>
                     </div>
                 </div>
-                <div class="row border-left border-right border-primary">
+        
+        <!-- Input field section of search card to capture location and dates-->
+                <div class="row border-left border-right border-primary search-card-border">
+                <!-- Location search form field -->
                     <div class="col-md-12">
                         <div class="form-group">
                                 <label class="col-form-label" for="inputLocation" id="search-label">Enter national park name:</label>
-                                <input type="text" class="form-control text-primary" placeholder="i.e. Zion National Park" id="location">
+                                <input type="text" required class="form-control text-primary typeahead" placeholder="i.e. Zion National Park" id="location">
                         </div>                
                     </div>
                 </div>
-                <div class="row border-left border-right border-primary">
+                <div class="row border-left border-right border-primary search-card-border">
+                <!-- Start date form field -->
                         <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="col-form-label col-form-label-sm" for="inputDate" id="search-label">Start Date:</label>
-                                    <input class="form-control form-control-sm text-primary" type="text" placeholder="MM/DD/YYYY" id="start-date">
+                                    <input class="form-control form-control-sm text-primary" type="text" placeholder="MM/DD" id="start-date">
                                 </div>                
                         </div>
+                <!-- End date form field -->
                         <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="col-form-label col-form-label-sm" for="inputDate" id="search-label">End Date:</label>
-                                    <input class="form-control form-control-sm text-primary" type="text" placeholder="MM/DD/YYYY" id="end-date">
+                                    <input class="form-control form-control-sm text-primary" type="text" placeholder="MM/DD" id="end-date">
                                 </div>                
                         </div>
                 </div>
-                <!-- <br class="border-left border-right border-primary"> -->
-                <div class="row border-left border-right border-primary">
+        
+        <!-- Checkbox section of search card to capture amenities-->
+                <!-- Showers Checkbox -->
+                <div class="row border-left border-right border-primary search-card-border">
                     <div class="col-md-6">
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
@@ -71,6 +85,7 @@
                                 </div>
                             </div>
                     </div>
+                    <!-- Toilets Checkbox -->
                     <div class="col-md-6">
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
@@ -80,7 +95,8 @@
                             </div>
                     </div>
                 </div>
-                <div class="row border-left border-right border-primary">
+                <!-- Trash Checkbox -->
+                <div class="row border-left border-right border-primary search-card-border">
                     <div class="col-md-6">
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
@@ -89,6 +105,7 @@
                                 </div>
                             </div>
                     </div>
+                 <!-- Food Storage Locker Checkbox -->                   
                     <div class="col-md-6">
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
@@ -98,7 +115,8 @@
                             </div>
                     </div>
                 </div>
-                <div class="row border-left border-right border-primary">
+                <!-- Potable Water Checkbox -->
+                <div class="row border-left border-right border-primary search-card-border">
                     <div class="col-md-6">
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
@@ -107,6 +125,7 @@
                                 </div>
                             </div>
                     </div>
+                <!-- Firewood For Sale Checkbox -->
                     <div class="col-md-6">
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
@@ -116,13 +135,102 @@
                             </div>
                     </div>
                 </div>
-                <div class="row border-left border-right border-primary">
+                <!-- Submit Button -->
+                <div class="row border-left border-right border-primary search-card-border">
                     <div class="col-md-12">
                         <button type="submit" class="btn btn-primary" id="submit">Submit</button>
                     </div>
                 </div>
-                <div class="row border-bottom border-primary"></div>
+                <!-- Empty row for layout purposes -->
+                <div class="row border-left border-right border-primary">
+                    <br>
+                    <div class="col-md-12 border-bottom border-primary "></div>
+                    <br>
+                </div>
+                <br>
+    
+        <!-- Weather Data Placeholders (to be dynamically populated)-->
+                <div class="row weather-header">
+                    <div class="col-md-12 bg-primary text-white text-center rounded">
+                        <p>Weather Forecast</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 border border-primary">
+                        <!-- Date Heading -->
+                        <div class="row text-primary text-center weather">
+                            <div class="col-md-12 bg-white border-bottom border-primary">
+                                <p>MM/DD</p>
+                            </div>
+                        </div>
+                        <!-- Weather data unordered list -->
+                        <div class="row weather">
+                            <div class="col-md-12">
+                                <ul>
+                                    <li>Hi:</li>
+                                    <li>Lo:</li>
+                                    <li>Precip:</li>
+                                    <li>Wind:</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 border border-primary">
+                            <div class="row text-primary text-center weather">
+                                <div class="col-md-12 bg-white border-bottom border-primary">
+                                    <p>MM/DD</p>
+                                </div>
+                            </div>
+                            <div class="row weather">
+                                <div class="col-md-12">
+                                    <ul>
+                                        <li>Hi:</li>
+                                        <li>Lo:</li>
+                                        <li>Precip:</li>
+                                        <li>Wind:</li>
+                                    </ul>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <div class="row">
+                        <div class="col-md-6 border border-primary">
+                                <div class="row text-primary text-center weather">
+                                    <div class="col-md-12 bg-white border-bottom border-primary">
+                                        <p>MM/DD</p>
+                                    </div>
+                                </div>
+                                <div class="row weather">
+                                    <div class="col-md-12">
+                                        <ul>
+                                            <li>Hi:</li>
+                                            <li>Lo:</li>
+                                            <li>Precip:</li>
+                                            <li>Wind:</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="col-md-6 border border-primary">
+                                <div class="row text-primary text-center weather">
+                                    <div class="col-md-12 bg-white border-bottom border-primary">
+                                        <p>MM/DD</p>
+                                    </div>
+                                </div>
+                                <div class="row weather">
+                                    <div class="col-md-12">
+                                        <ul>
+                                            <li>Hi:</li>
+                                            <li>Lo:</li>
+                                            <li>Precip:</li>
+                                            <li>Wind:</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                        </div>
+                </div>
         </div>
+    <!-- Campground Display Div Placeholder (to be dynamically populated)-->
         <div class="col-xs-12 col-sm-8 col-md-8 offset-md-1 border border-primary rounded" id="display-campsites">
             <div class="row">
                 <div class="col-md-6">
@@ -166,7 +274,18 @@
 </div>
 <br>
 <br>
+
     <!-- Our JS File -->
     <script type = "text/javascript" src="assets/javascript/logic.js"></script>
+
+    <!-- Twitter Typeahead Library Bundle -->
+    <script src="assets/javascript/typeahead.bundle.js"></script>
+    <!-- Our JS Files -->
+    <script src="assets/javascript/logic.js"></script>
+    <script src="assets/javascript/our_typeahead.js"></script>
+
+    <!-- Our JS File -->
+    <script type = "text/javascript" src="assets/javascript/logic.js"></script>
+
 </body>
 </html>
