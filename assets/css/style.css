@@ -20,7 +20,15 @@ h1 {
 /* Campsite div styles */
 #display-campsites a {
     text-decoration: none;
-    color: darkslategrey;
+    color: white;
+}
+
+h2 {
+  padding-top: 10px;
+}
+
+.btn {
+  margin: 0px 5px 5px;
 }
 
 /* Search card styles */

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,11 +11,13 @@
     <!-- Font Awesome Link -->
     <script src="https://kit.fontawesome.com/fd64f95310.js"></script>
     <!-- Google Font Link -->
-    <link href="https://fonts.googleapis.com/css?family=Adamina&display=swap" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/css?family=Adamina&display=swap" rel="stylesheet">
     <!-- Bootstrap CDN Link -->
-    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-T5jhQKMh96HMkXwqVMSjF3CmLcL1nT9//tCqu9By5XSdj7CwR0r+F3LTzUdfkkQf" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/flatly/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T5jhQKMh96HMkXwqVMSjF3CmLcL1nT9//tCqu9By5XSdj7CwR0r+F3LTzUdfkkQf" crossorigin="anonymous">
     <!-- jQuery CDN Link -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <!-- Moment CDN Link-->
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
     <title>Document</title>
@@ -22,119 +25,133 @@
 
 <body>
 
-<!-- Jumbotron with responsive image as background-->
-<header>
-    <div class="jumbotron jumbotron-fluid text-primary text-center border border-primary rounded">
+    <!-- Jumbotron with responsive image as background-->
+    <header>
+        <div class="jumbotron jumbotron-fluid text-primary text-center border border-primary rounded">
             <div class="container header">
                 <h1 class="display-2" id="jumbo-title">Our Site Name Here</h1>
                 <p class="lead" id="jumbo-lead">This is for our site description so that the user knows what to do.</p>
             </div>
-    </div>
-</header>
-<br>
+        </div>
+    </header>
+    <br>
 
-<!-- Page content container-->
-<div class="container">
-    <div class="row">
+    <!-- Page content container-->
+    <div class="container">
+        <div class="row">
 
-    <!-- Search Card -->
-        <div class="col-xs-12 col-sm-4 col-md-3" id="search-card">
-        
-        <!-- Search Card Title-->
+            <!-- Search Card -->
+            <div class="col-xs-12 col-sm-4 col-md-3" id="search-card">
+
+                <!-- Search Card Title-->
                 <div class="row">
                     <div class="col-md-12 search-heading bg-primary text-white border-top border-primary rounded">
                         <h5>Search For Campgrounds</h5>
                     </div>
                 </div>
-        
-        <!-- Input field section of search card to capture location and dates-->
+
+                <!-- Input field section of search card to capture location and dates-->
                 <div class="row border-left border-right border-primary search-card-border">
-                <!-- Location search form field -->
+                    <!-- Location search form field -->
                     <div class="col-md-12">
                         <div class="form-group">
-                                <label class="col-form-label" for="inputLocation" id="search-label">Enter national park name:</label>
-                                <input type="text" required class="form-control text-primary typeahead" placeholder="i.e. Zion National Park" id="location">
-                        </div>                
+                            <label class="col-form-label" for="inputLocation" id="search-label">Enter national park
+                                name:</label>
+                            <input type="text" required class="form-control text-primary typeahead"
+                                placeholder="i.e. Zion National Park" id="location">
+                        </div>
                     </div>
                 </div>
                 <div class="row border-left border-right border-primary search-card-border">
-                <!-- Start date form field -->
-                        <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-form-label col-form-label-sm" for="inputDate" id="search-label">Start Date:</label>
-                                    <input class="form-control form-control-sm text-primary" type="text" placeholder="MM/DD" id="start-date">
-                                </div>                
+                    <!-- Start date form field -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-form-label col-form-label-sm" for="inputDate" id="search-label">Start
+                                Date:</label>
+                            <input class="form-control form-control-sm text-primary" type="text" placeholder="MM/DD"
+                                id="start-date">
                         </div>
-                <!-- End date form field -->
-                        <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-form-label col-form-label-sm" for="inputDate" id="search-label">End Date:</label>
-                                    <input class="form-control form-control-sm text-primary" type="text" placeholder="MM/DD" id="end-date">
-                                </div>                
+                    </div>
+                    <!-- End date form field -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-form-label col-form-label-sm" for="inputDate" id="search-label">End
+                                Date:</label>
+                            <input class="form-control form-control-sm text-primary" type="text" placeholder="MM/DD"
+                                id="end-date">
                         </div>
+                    </div>
                 </div>
-        
-        <!-- Checkbox section of search card to capture amenities-->
+
+                <!-- Checkbox section of search card to capture amenities-->
                 <!-- Showers Checkbox -->
                 <div class="row border-left border-right border-primary search-card-border">
                     <div class="col-md-6">
-                            <div class="form-group">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" data-check="false" id="showers">
-                                    <label class="custom-control-label" for="showers">Showers&nbsp;&nbsp;<i class="fas fa-shower"></i></label>
-                                </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" data-check="false" id="showers">
+                                <label class="custom-control-label" for="showers">Showers&nbsp;&nbsp;<i
+                                        class="fas fa-shower"></i></label>
                             </div>
+                        </div>
                     </div>
                     <!-- Toilets Checkbox -->
                     <div class="col-md-6">
-                            <div class="form-group">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" data-check="false" id="toilets">
-                                    <label class="custom-control-label" for="toilets">Toilets&nbsp;&nbsp;<i class="fas fa-toilet"></i></label>
-                                </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" data-check="false" id="toilets">
+                                <label class="custom-control-label" for="toilets">Toilets&nbsp;&nbsp;<i
+                                        class="fas fa-toilet"></i></label>
                             </div>
+                        </div>
                     </div>
                 </div>
                 <!-- Trash Checkbox -->
                 <div class="row border-left border-right border-primary search-card-border">
                     <div class="col-md-6">
-                            <div class="form-group">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" data-check="false" id="trash">
-                                    <label class="custom-control-label" for="trash">Trash Collection&nbsp;&nbsp;<i class="fas fa-trash-alt"></i></label>
-                                </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" data-check="false" id="trash">
+                                <label class="custom-control-label" for="trash">Trash Collection&nbsp;&nbsp;<i
+                                        class="fas fa-trash-alt"></i></label>
                             </div>
+                        </div>
                     </div>
-                 <!-- Food Storage Locker Checkbox -->                   
+                    <!-- Food Storage Locker Checkbox -->
                     <div class="col-md-6">
-                            <div class="form-group">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" data-check="false" id="foodStorage">
-                                    <label class="custom-control-label" for="foodStorage">Food Storage&nbsp;&nbsp;<i class="fas fa-door-closed"></i></label>
-                                </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" data-check="false" id="foodStorage">
+                                <label class="custom-control-label" for="foodStorage">Food Storage&nbsp;&nbsp;<i
+                                        class="fas fa-door-closed"></i></label>
                             </div>
+                        </div>
                     </div>
                 </div>
                 <!-- Potable Water Checkbox -->
                 <div class="row border-left border-right border-primary search-card-border">
                     <div class="col-md-6">
-                            <div class="form-group">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" data-check="false" id="water">
-                                    <label class="custom-control-label" for="water">Potable Water&nbsp;&nbsp;<i class="fas fa-tint"></i></label>
-                                </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" data-check="false" id="water">
+                                <label class="custom-control-label" for="water">Potable Water&nbsp;&nbsp;<i
+                                        class="fas fa-tint"></i></label>
                             </div>
+                        </div>
                     </div>
-                <!-- Firewood For Sale Checkbox -->
+                    <!-- Firewood For Sale Checkbox -->
                     <div class="col-md-6">
-                            <div class="form-group">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" data-check="false" id="firewood">
-                                    <label class="custom-control-label" for="firewood">Firewood Avaible&nbsp;&nbsp;<i class="fas fa-fire"></i></label>
-                                </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" data-check="false" id="firewood">
+                                <label class="custom-control-label" for="firewood">Firewood Avaible&nbsp;&nbsp;<i
+                                        class="fas fa-fire"></i></label>
                             </div>
+                        </div>
                     </div>
                 </div>
+
+
                 <!-- Submit Button -->
                 <div class="row border-left border-right border-primary search-card-border">
                     <div class="col-md-12">
@@ -148,8 +165,8 @@
                     <br>
                 </div>
                 <br>
-    
-        <!-- Weather Data Placeholders (to be dynamically populated)-->
+
+                <!-- Weather Data Placeholders (to be dynamically populated)-->
                 <div class="row weather-header">
                     <div class="col-md-12 bg-primary text-white text-center rounded">
                         <p>Weather Forecast</p>
@@ -176,116 +193,81 @@
                         </div>
                     </div>
                     <div class="col-md-6 border border-primary">
-                            <div class="row text-primary text-center weather">
-                                <div class="col-md-12 bg-white border-bottom border-primary">
-                                    <p>MM/DD</p>
-                                </div>
+                        <div class="row text-primary text-center weather">
+                            <div class="col-md-12 bg-white border-bottom border-primary">
+                                <p>MM/DD</p>
                             </div>
-                            <div class="row weather">
-                                <div class="col-md-12">
-                                    <ul>
-                                        <li>Hi:</li>
-                                        <li>Lo:</li>
-                                        <li>Precip:</li>
-                                        <li>Wind:</li>
-                                    </ul>
-                                </div>
+                        </div>
+                        <div class="row weather">
+                            <div class="col-md-12">
+                                <ul>
+                                    <li>Hi:</li>
+                                    <li>Lo:</li>
+                                    <li>Precip:</li>
+                                    <li>Wind:</li>
+                                </ul>
                             </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
-                        <div class="col-md-6 border border-primary">
-                                <div class="row text-primary text-center weather">
-                                    <div class="col-md-12 bg-white border-bottom border-primary">
-                                        <p>MM/DD</p>
-                                    </div>
-                                </div>
-                                <div class="row weather">
-                                    <div class="col-md-12">
-                                        <ul>
-                                            <li>Hi:</li>
-                                            <li>Lo:</li>
-                                            <li>Precip:</li>
-                                            <li>Wind:</li>
-                                        </ul>
-                                    </div>
-                                </div>
+                    <div class="col-md-6 border border-primary">
+                        <div class="row text-primary text-center weather">
+                            <div class="col-md-12 bg-white border-bottom border-primary">
+                                <p>MM/DD</p>
+                            </div>
                         </div>
-                        <div class="col-md-6 border border-primary">
-                                <div class="row text-primary text-center weather">
-                                    <div class="col-md-12 bg-white border-bottom border-primary">
-                                        <p>MM/DD</p>
-                                    </div>
-                                </div>
-                                <div class="row weather">
-                                    <div class="col-md-12">
-                                        <ul>
-                                            <li>Hi:</li>
-                                            <li>Lo:</li>
-                                            <li>Precip:</li>
-                                            <li>Wind:</li>
-                                        </ul>
-                                    </div>
-                                </div>
+                        <div class="row weather">
+                            <div class="col-md-12">
+                                <ul>
+                                    <li>Hi:</li>
+                                    <li>Lo:</li>
+                                    <li>Precip:</li>
+                                    <li>Wind:</li>
+                                </ul>
+                            </div>
                         </div>
-                </div>
-        </div>
-    <!-- Campground Display Div Placeholder (to be dynamically populated)-->
-        <div class="col-xs-12 col-sm-8 col-md-8 offset-md-1 border border-primary rounded" id="display-campsites">
-            <div class="row">
-                <div class="col-md-6">
-                        <br>
-                        <img src="https://draftin.com/images/52400?token=LUnMCVLjXimJAKVv7GSI-0zRRaBkkN0SPUYgk9GZwnkyxMNBrqHtXdp7QaHUheNKSs5VMnCP8mRuzfBtw9u5Jes" alt="placeholder" class="border border-secondary rounded mx-auto d-block">
-                        <a href="#"><p class="text-center">Campground Name</p></a>
-                </div>
-                <div class="col-md-6">
-                        <br>
-                        <img src="https://draftin.com/images/52400?token=LUnMCVLjXimJAKVv7GSI-0zRRaBkkN0SPUYgk9GZwnkyxMNBrqHtXdp7QaHUheNKSs5VMnCP8mRuzfBtw9u5Jes" alt="placeholder" class="border border-secondary rounded mx-auto d-block">
-                        <a href="#"><p class="text-center">Campground Name</p></a>                
+                    </div>
+                    <div class="col-md-6 border border-primary">
+                        <div class="row text-primary text-center weather">
+                            <div class="col-md-12 bg-white border-bottom border-primary">
+                                <p>MM/DD</p>
+                            </div>
+                        </div>
+                        <div class="row weather">
+                            <div class="col-md-12">
+                                <ul>
+                                    <li>Hi:</li>
+                                    <li>Lo:</li>
+                                    <li>Precip:</li>
+                                    <li>Wind:</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                    <div class="col-md-6">
-                            <br>
-                            <img src="https://draftin.com/images/52400?token=LUnMCVLjXimJAKVv7GSI-0zRRaBkkN0SPUYgk9GZwnkyxMNBrqHtXdp7QaHUheNKSs5VMnCP8mRuzfBtw9u5Jes" alt="placeholder" class="border border-secondary rounded mx-auto d-block">
-                            <a href="#"><p class="text-center">Campground Name</p></a>
-                    </div>
-                    <div class="col-md-6">
-                            <br>
-                            <img src="https://draftin.com/images/52400?token=LUnMCVLjXimJAKVv7GSI-0zRRaBkkN0SPUYgk9GZwnkyxMNBrqHtXdp7QaHUheNKSs5VMnCP8mRuzfBtw9u5Jes" alt="placeholder" class="border border-secondary rounded mx-auto d-block">
-                            <a href="#"><p class="text-center">Campground Name</p></a>                
-                    </div>
-            </div>
-            <div class="row">
-                    <div class="col-md-6">
-                            <br>
-                            <img src="https://draftin.com/images/52400?token=LUnMCVLjXimJAKVv7GSI-0zRRaBkkN0SPUYgk9GZwnkyxMNBrqHtXdp7QaHUheNKSs5VMnCP8mRuzfBtw9u5Jes" alt="placeholder" class="border border-secondary rounded mx-auto d-block">
-                            <a href="#"><p class="text-center">Campground Name</p></a>
-                    </div>
-                    <div class="col-md-6">
-                            <br>
-                            <img src="https://draftin.com/images/52400?token=LUnMCVLjXimJAKVv7GSI-0zRRaBkkN0SPUYgk9GZwnkyxMNBrqHtXdp7QaHUheNKSs5VMnCP8mRuzfBtw9u5Jes" alt="placeholder" class="border border-secondary rounded mx-auto d-block">
-                            <a href="#"><p class="text-center">Campground Name</p></a>                
-                    </div>
+            <!-- Campground Display Div Placeholder (to be dynamically populated)-->
+            <div class="col-xs-12 col-sm-8 col-md-8 offset-md-1 border border-primary rounded" id="display-campsites">
+                <div class="row" id="append-here">
+                    <br>
+                </div>
+
+
             </div>
         </div>
+        <br>
+        <br>
 
-    </div>
-</div>
-<br>
-<br>
+        <!-- Our JS File -->
+        <script type="text/javascript" src="assets/javascript/logic.js"></script>
 
-    <!-- Our JS File -->
-    <script type = "text/javascript" src="assets/javascript/logic.js"></script>
+        <!-- Twitter Typeahead Library Bundle -->
+        <script src="assets/javascript/typeahead.bundle.js"></script>
+       
+        <script src="assets/javascript/our_typeahead.js"></script>
 
-    <!-- Twitter Typeahead Library Bundle -->
-    <script src="assets/javascript/typeahead.bundle.js"></script>
-    <!-- Our JS Files -->
-    <script src="assets/javascript/logic.js"></script>
-    <script src="assets/javascript/our_typeahead.js"></script>
-
-    <!-- Our JS File -->
-    <script type = "text/javascript" src="assets/javascript/logic.js"></script>
 
 </body>
+
 </html>
