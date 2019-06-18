@@ -19,9 +19,7 @@
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
     <title>Document</title>
 </head>
-
 <body>
-
 <!-- Jumbotron with responsive image as background-->
 <header>
     <div class="jumbotron jumbotron-fluid text-primary text-center border border-primary rounded">
@@ -32,11 +30,9 @@
     </div>
 </header>
 <br>
-
 <!-- Page content container-->
 <div class="container">
     <div class="row">
-
     <!-- Search Card -->
         <div class="col-xs-12 col-sm-4 col-md-3" id="search-card">
         
@@ -59,17 +55,17 @@
                 </div>
                 <div class="row border-left border-right border-primary search-card-border">
                 <!-- Start date form field -->
-                        <div class="col-md-6">
+                        <div class="col-lg-8 col-md-12">
                                 <div class="form-group">
                                     <label class="col-form-label col-form-label-sm" for="inputDate" id="search-label">Start Date:</label>
-                                    <input class="form-control form-control-sm text-primary" type="text" placeholder="MM/DD" id="start-date">
+                                    <input class="form-control form-control-sm text-primary" type="date" id="start-date">
                                 </div>                
                         </div>
                 <!-- End date form field -->
-                        <div class="col-md-6">
+                        <div class="col-lg-8 col-md-12">
                                 <div class="form-group">
                                     <label class="col-form-label col-form-label-sm" for="inputDate" id="search-label">End Date:</label>
-                                    <input class="form-control form-control-sm text-primary" type="text" placeholder="MM/DD" id="end-date">
+                                    <input class="form-control form-control-sm text-primary" type="date" id="end-date">
                                 </div>                
                         </div>
                 </div>
@@ -232,8 +228,8 @@
         </div>
     <!-- Campground Display Div Placeholder (to be dynamically populated)-->
         <div class="col-xs-12 col-sm-8 col-md-8 offset-md-1 border border-primary rounded" id="display-campsites">
-            <div class="row">
-                <div class="col-md-6">
+            <div class="row" id="append-here">
+                <!-- <div class="col-md-6">
                         <br>
                         <img src="https://draftin.com/images/52400?token=LUnMCVLjXimJAKVv7GSI-0zRRaBkkN0SPUYgk9GZwnkyxMNBrqHtXdp7QaHUheNKSs5VMnCP8mRuzfBtw9u5Jes" alt="placeholder" class="border border-secondary rounded mx-auto d-block">
                         <a href="#"><p class="text-center">Campground Name</p></a>
@@ -242,9 +238,9 @@
                         <br>
                         <img src="https://draftin.com/images/52400?token=LUnMCVLjXimJAKVv7GSI-0zRRaBkkN0SPUYgk9GZwnkyxMNBrqHtXdp7QaHUheNKSs5VMnCP8mRuzfBtw9u5Jes" alt="placeholder" class="border border-secondary rounded mx-auto d-block">
                         <a href="#"><p class="text-center">Campground Name</p></a>                
-                </div>
+                </div> -->
             </div>
-            <div class="row">
+            <!-- <div class="row">
                     <div class="col-md-6">
                             <br>
                             <img src="https://draftin.com/images/52400?token=LUnMCVLjXimJAKVv7GSI-0zRRaBkkN0SPUYgk9GZwnkyxMNBrqHtXdp7QaHUheNKSs5VMnCP8mRuzfBtw9u5Jes" alt="placeholder" class="border border-secondary rounded mx-auto d-block">
@@ -267,26 +263,22 @@
                             <img src="https://draftin.com/images/52400?token=LUnMCVLjXimJAKVv7GSI-0zRRaBkkN0SPUYgk9GZwnkyxMNBrqHtXdp7QaHUheNKSs5VMnCP8mRuzfBtw9u5Jes" alt="placeholder" class="border border-secondary rounded mx-auto d-block">
                             <a href="#"><p class="text-center">Campground Name</p></a>                
                     </div>
-            </div>
+            </div> -->
         </div>
-
     </div>
 </div>
 <br>
 <br>
-<<<<<<< HEAD
+
+    <!-- Our JS File -->
+    <script type="text/javascript" src="assets/javascript/logic.js"></script>
+
     <!-- Twitter Typeahead Library Bundle -->
     <script src="assets/javascript/typeahead.bundle.js"></script>
-    <!-- Our JS Files -->
-    <script src="assets/javascript/logic.js"></script>
+
     <script src="assets/javascript/our_typeahead.js"></script>
-=======
-    <!-- Our JS File -->
-    <script type = "text/javascript" src="assets/javascript/logic.js"></script>
-<<<<<<< HEAD
->>>>>>> 77411977f46976f4b839365f6f676f33fa47aab0
->>>>>>> e0bc148e3595c8f57b692a970d2acfaa4b68a290
-=======
->>>>>>> 374de307a5322f8ce93ce596f9d4f24d515011c1
+
+
 </body>
+
 </html>
