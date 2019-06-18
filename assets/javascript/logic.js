@@ -1,7 +1,7 @@
 var amenitiesArray = [];
 $("#display-campsites").hide();
 $(".custom-control-input").on("click", function () {
-  console.log($(this).attr("data-check"));
+ // console.log($(this).attr("data-check"));
   if ($(this).attr("data-check") === "false") {
     $(this).attr("data-check", "true");
   } else {
@@ -14,7 +14,7 @@ var parkLatLong;
 
 $("#submit").on("click", function (event) {
   event.preventDefault();
-  console.log('in on submit');
+  //console.log('in on submit');
 
   // var amenitiesArray = [];
   if ($("#showers").attr("data-check") === "true") {
@@ -35,7 +35,7 @@ $("#submit").on("click", function (event) {
   if ($("#firewood").attr("data-check") === "true") {
     amenitiesArray.push($("#firewood").attr("id"));
   }
-
+  var parkName = $('#location').val().trim();
   var parkUrl =
     "https://developer.nps.gov/api/v1/parks?api_key=IvDm5VJctJF8OHMsxVyrHXjVShQNgrTwYSbzQrYJ&q=" +
     parkName;
@@ -47,12 +47,13 @@ $("#submit").on("click", function (event) {
     parkCode = parkResults.parkCode;
     parkLatLong = parkResults.latLong;
     campground();
+    getWeather(parkLatLong);
   })
 
 });
 
 function campground() {
-  console.log('in campground');
+  //console.log('in campground');
 
   var campgroundUrl =
     "https://developer.nps.gov/api/v1/campgrounds?api_key=IvDm5VJctJF8OHMsxVyrHXjVShQNgrTwYSbzQrYJ&parkCode=" +
@@ -63,9 +64,9 @@ function campground() {
     method: "GET"
   }).then(function (response) {
     var campResults = response.data;
-    console.log(campResults);
+    //console.log(campResults);
 
-    console.log(campResults.length);
+    //console.log(campResults.length);
     for (var i = 0; i < campResults.length; i++) {
       var campgroundName = campResults[i].name;
       var campgroundDescription = campResults[i].description;
@@ -87,13 +88,15 @@ function campground() {
 
 
 
-function getWeather(lat, long, date) {
-  latLongString = lat + "," + long + "," + date;
-  startDate = $('#start-date').val().trim();
-  startMoment = moment(startDate, 'MM/DD/YYYY');
-  endDate = $('#end-date').val().trim();
+function getWeather(parkLatLong) {
+  var latLongArray = parkLatLong.split(/[:,]+/g);
+  var startDate = $('#start-date').val().trim();
+  var startMoment = moment(startDate, 'MM/DD/YYYY');
+  var endDate = $('#end-date').val().trim();
+  var latLongString = '/' + latLongArray[1] + "," + latLongArray[3];
   var darkskyKey = "24ad87e96d744bd3fb31284ccc8763a1"
-  var weatherUrl = "https://api.darksky.net/forecast/" + darkskyKey + "/[latitude],[longitude],[time]"
+  var weatherUrl = "https://api.darksky.net/forecast/" + darkskyKey + latLongString;
+  console.log(weatherUrl)
   // clear out values
   //$('#location').val('');
   $.ajax({
