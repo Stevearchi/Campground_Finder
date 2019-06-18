@@ -1,7 +1,7 @@
 var amenitiesArray = [];
 
 $(".custom-control-input").on("click", function() {
-  console.log($(this).attr("data-check"));
+  //console.log($(this).attr("data-check"));
   if ($(this).attr("data-check") === "false") {
     $(this).attr("data-check", "true");
   } else {
@@ -40,22 +40,22 @@ $("#submit").on("click", function(event) {
     .trim();
 //   campQueryParams.fields = JSON.stringify(amenitiesArray);
 
-  console.log(campQueryParams);
+ // console.log(campQueryParams);
 // can't get the amenities array to function properly in the URL, but since they don't really functionally change the search results i think that's ok
   
-var parkName = $("#location").val().trim()
+// var parkName = $("#location").val().trim()
 
-var parkUrl = "https://developer.nps.gov/api/v1/parks?api_key=IvDm5VJctJF8OHMsxVyrHXjVShQNgrTwYSbzQrYJ&q=" + parkName
+// var parkUrl = "https://developer.nps.gov/api/v1/parks?api_key=IvDm5VJctJF8OHMsxVyrHXjVShQNgrTwYSbzQrYJ&q=" + parkName
 
-$.ajax({
-  url: parkUrl,
-  method: "GET",
-}).then(function (response) {
-  var parkResults = response.data;
-  var parkCode = parkResults.parkCode
-  campQueryParams.parkCode = parkCode;
-  console.log("campQueryParams: ", campQueryParams)
-})
+// $.ajax({
+//   url: parkUrl,
+//   method: "GET",
+// }).then(function (response) {
+//   var parkResults = response.data;
+//   var parkCode = parkResults.parkCode
+//   campQueryParams.parkCode = parkCode;
+//   console.log("campQueryParams: ", campQueryParams)
+// })
 
 
  
@@ -71,3 +71,37 @@ var campgroundUrl =
 
     })
 });
+
+
+var darkskyKey = "24ad87e96d744bd3fb31284ccc8763a1"
+var weatherUrl = "https://api.darksky.net/forecast/" + darkskyKey + "/[latitude],[longitude],[time]"
+var campQueryParams = {
+    "api_key": "IvDm5VJctJF8OHMsxVyrHXjVShQNgrTwYSbzQrYJ",
+}
+
+function getWeather(lat, long, date) {
+  latLongString =lat + "," + long + "," + date;
+  $.ajax({
+      method: 'GET',
+      url: weatherUrl
+  }).then(function (response){
+  })
+
+  $('#submit').on('click', function (event) {
+      event.preventDefault();
+      startDate = $('#start-date').val().trim();
+      startMoment = moment(startDate, 'MM/DD/YYYY');
+      endDate = $('#end-date').val().trim();
+  
+      $.ajax({
+          method: 'GET',
+          url: campgroundUrl
+      }).then(function (response) {
+          //loop through each campground
+        // JSON.object
+        // parkLatLong
+          getWeather(latLong.lat, latLong.long, startDate);
+      });
+  
+      // clear out values
+      //$('#location').val('');
