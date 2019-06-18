@@ -1,4 +1,6 @@
 /* Bootstrap styling overrides */
+
+/* Header styles */
 .jumbotron {
     background-image: url("../images/header.jpg");
     background-size: cover;
@@ -9,22 +11,21 @@
     background: rgba(255,255,255,0.40);
 }
 
-h5 {
-    padding: 10px;
-}
-
 h1 {
     font-family: 'Adamina', serif;
     padding-top: 20px;
 }
 
-p {
-    padding-top: 10px;
-}
 
+/* Campsite div styles */
 #display-campsites a {
     text-decoration: none;
     color: darkslategrey;
+}
+
+/* Search card styles */
+h5 {
+    padding: 10px;
 }
 
 col-form-label-sm ::placeholder {
@@ -35,7 +36,27 @@ col-form-label-sm ::placeholder {
     margin-bottom: 10px;
 }
 
-/* Styling for twitter typeahead  */
+/* Weather div styles */
+.weather p, .weather li {
+    font-size: 12px;
+}
+
+.weather p {
+    margin: 0 auto;
+    padding: 3px;
+}
+
+.weather {
+    background-color: gainsboro;
+}
+
+.weather-header p {
+    margin: 0 auto;
+    padding: 10px;
+}
+
+
+/* Styling for Twitter typeahead dropdown */
 span.twitter-typeahead .tt-menu,
 span.twitter-typeahead .tt-dropdown-menu {
   cursor: pointer;
