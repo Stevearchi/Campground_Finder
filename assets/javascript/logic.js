@@ -1,6 +1,6 @@
 var amenitiesArray = [];
 $("#display-campsites").hide();
-$(".custom-control-input").on("click", function() {
+$(".custom-control-input").on("click", function () {
   console.log($(this).attr("data-check"));
   if ($(this).attr("data-check") === "false") {
     $(this).attr("data-check", "true");
@@ -12,10 +12,10 @@ var parkCode;
 var parkLatLong;
 
 
-$("#submit").on("click", function(event) {
+$("#submit").on("click", function (event) {
   event.preventDefault();
   console.log('in on submit');
-  
+
   // var amenitiesArray = [];
   if ($("#showers").attr("data-check") === "true") {
     amenitiesArray.push($("#showers").attr("id"));
@@ -36,40 +36,24 @@ $("#submit").on("click", function(event) {
     amenitiesArray.push($("#firewood").attr("id"));
   }
 
-  // var campQueryParams = {
-  //   api_key: "IvDm5VJctJF8OHMsxVyrHXjVShQNgrTwYSbzQrYJ"
-  // };
-
-  // campQueryParams.q = $("#location")
-  //   .val()
-  //   .trim();
-  //   campQueryParams.fields = JSON.stringify(amenitiesArray);
-
-  // console.log(campQueryParams);
-  // can't get the amenities array to function properly in the URL, but since they don't really functionally change the search results i think that's ok
-
-  var parkName = $("#location")
-    .val()
-    .trim();
-
   var parkUrl =
     "https://developer.nps.gov/api/v1/parks?api_key=IvDm5VJctJF8OHMsxVyrHXjVShQNgrTwYSbzQrYJ&q=" +
     parkName;
   $.ajax({
     url: parkUrl,
     method: "GET"
-  }).then(function(response) {
+  }).then(function (response) {
     var parkResults = response.data[0];
     parkCode = parkResults.parkCode;
     parkLatLong = parkResults.latLong;
     campground();
   })
-  
-})
+
+});
 
 function campground() {
   console.log('in campground');
-  
+
   var campgroundUrl =
     "https://developer.nps.gov/api/v1/campgrounds?api_key=IvDm5VJctJF8OHMsxVyrHXjVShQNgrTwYSbzQrYJ&parkCode=" +
     parkCode;
@@ -77,10 +61,10 @@ function campground() {
   $.ajax({
     url: campgroundUrl,
     method: "GET"
-  }).then(function(response) {
+  }).then(function (response) {
     var campResults = response.data;
     console.log(campResults);
-    
+
     console.log(campResults.length);
     for (var i = 0; i < campResults.length; i++) {
       var campgroundName = campResults[i].name;
@@ -97,5 +81,25 @@ function campground() {
       $("#append-here").append(campsite);
     }
     // append these divs to soon to be created row
+  });
+}
+
+
+
+
+function getWeather(lat, long, date) {
+  latLongString = lat + "," + long + "," + date;
+  startDate = $('#start-date').val().trim();
+  startMoment = moment(startDate, 'MM/DD/YYYY');
+  endDate = $('#end-date').val().trim();
+  var darkskyKey = "24ad87e96d744bd3fb31284ccc8763a1"
+  var weatherUrl = "https://api.darksky.net/forecast/" + darkskyKey + "/[latitude],[longitude],[time]"
+  // clear out values
+  //$('#location').val('');
+  $.ajax({
+    method: 'GET',
+    url: weatherUrl
+  }).then(function (response) {
+
   });
 }
