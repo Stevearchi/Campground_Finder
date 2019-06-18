@@ -36,17 +36,7 @@ $("#submit").on("click", function(event) {
     amenitiesArray.push($("#firewood").attr("id"));
   }
 
-  // var campQueryParams = {
-  //   api_key: "IvDm5VJctJF8OHMsxVyrHXjVShQNgrTwYSbzQrYJ"
-  // };
 
-  // campQueryParams.q = $("#location")
-  //   .val()
-  //   .trim();
-  //   campQueryParams.fields = JSON.stringify(amenitiesArray);
-
-  // console.log(campQueryParams);
-  // can't get the amenities array to function properly in the URL, but since they don't really functionally change the search results i think that's ok
 
   var parkName = $("#location")
     .val()
@@ -83,19 +73,27 @@ function campground() {
     
     console.log(campResults.length);
     for (var i = 0; i < campResults.length; i++) {
+      $("#display-campsites").show();
       var campgroundName = campResults[i].name;
       var campgroundDescription = campResults[i].description;
       var campgroundInfoUrl = campResults[i].regulationsurl;
       var campgroundDirections = campResults[i].directionsUrl;
-      $("#display-campsites").show();
+      if (campground)
       var informationButton = $("<a href=" + campgroundInfoUrl + " target='_blank'> Information </a>").addClass("btn btn-primary");
       var directionsButton = $("<a href=" + campgroundDirections + " target='_blank'> Directions </a>").addClass("btn btn-primary");
       var campsite = $("<div>").addClass("ajaxResponse col-md-12 border-bottom border-primary");
       campsite.append("<h2>" + campgroundName + "</h2>")
-      campsite.append("<p> Brief campground description: " + campgroundDescription + "</p>");
+      campsite.append("<p>"  + campgroundDescription + "</p>");
       campsite.append(directionsButton, informationButton);
       $("#append-here").append(campsite);
     }
     // append these divs to soon to be created row
   });
 }
+
+$("#reset").on("click", function() {
+  $("#append-here").empty();
+  $("input").val("");
+  $("#display-campsites").hide();
+  
+});
