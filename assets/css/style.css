@@ -17,14 +17,26 @@ h1 {
     padding-top: 20px;
 }
 
+p {
+    padding-top: 10px;
+}
+
 #display-campsites a {
     text-decoration: none;
     color: darkslategrey;
 }
 
+col-form-label-sm ::placeholder {
+    font-size: 7px;
+}
+
 #submit {
     margin-bottom: 10px;
 }
+
+input:invalid {
+    border: 2px solid red;
+  }
 
 @media screen and (max-width: 986px) {
     label {
