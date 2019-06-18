@@ -64,7 +64,7 @@ $("#submit").on("click", function (event) {
 
 });
 
-// Function to find and display campgrounds meeting the search parameters
+// Function to get and display campgrounds meeting the search parameters
 function campground() {
   //console.log('in campground');
 
@@ -89,10 +89,10 @@ function campground() {
       // south-campground.htm
       // " + campgroundInfoUrl + " target='_blank'> Information </a>").addClass("btn btn-primary");
       //
-      var directionsButton = $("<a href=" + campgroundDirections + " target='_blank'> Directions </a>").addClass("btn btn-primary");
-      var campsite = $("<div>").addClass("ajaxResponse col-md-12 border-bottom border-primary");
-      campsite.append("<h2>" + campgroundName + "</h2>")
-      campsite.append("<p>"  + campgroundDescription + "</p>");
+      var directionsButton = $("<a id='dynamic-button' href=" + campgroundDirections + " target='_blank'> Directions </a>").addClass("btn btn-primary");
+      var campsite = $("<div>").addClass("ajaxResponse col-md-12");
+      campsite.append("<h3 class='row container-fluid bg-light text-primary mx-auto justify-content-center border border-right-0 border-left-0 border-primary rounded'>" + campgroundName + "</h3>")
+      campsite.append("<p id='dynamic-p'>"  + campgroundDescription + "</p>");
       campsite.append(directionsButton, informationButton);
       $("#append-here").append(campsite);
     }
@@ -109,7 +109,7 @@ $("#reset").on("click", function() {
 });
 
 
-
+// Function to get and display aspects of weather forecast for dates selected by user
 function getWeather(parkLatLong) {
 
   var latLongArray = parkLatLong.split(/[:,]+/g);
