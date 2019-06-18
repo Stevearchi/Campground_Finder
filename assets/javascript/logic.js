@@ -8,6 +8,8 @@ $(".custom-control-input").on("click", function() {
     $(this).attr("data-check", "false");
   }
 });
+var parkCode;
+var parkLatLong;``
 
 $("#submit").on("click", function(event) {
   event.preventDefault();
@@ -46,8 +48,6 @@ $("#submit").on("click", function(event) {
 var parkName = $("#location").val().trim()
 
 var parkUrl = "https://developer.nps.gov/api/v1/parks?api_key=IvDm5VJctJF8OHMsxVyrHXjVShQNgrTwYSbzQrYJ&q=" + parkName
-var parkCode = "";
-var parkLatLong = "";
 $.ajax({
   url: parkUrl,
   method: "GET",
@@ -57,11 +57,12 @@ $.ajax({
   parkLatLong = parkResults.latLong;
   console.log(parkResults)
   console.log(parkCode, parkLatLong)
-  
+  campground();
 })
 
+});
 
- 
+function campground () {
 var campgroundUrl =
     "https://developer.nps.gov/api/v1/campgrounds?api_key=IvDm5VJctJF8OHMsxVyrHXjVShQNgrTwYSbzQrYJ&parkCode=" + parkCode;
 
@@ -70,10 +71,13 @@ var campgroundUrl =
       method: "GET"
     }).then(function(response) {
       var campResults = response.data;
-      var campgroundOne = $("<div").addClass("ajaxResponse")
-      var camgroundName = response.name
-      campgroundOne.text = campgroundName
+      console.log(campResults)
+      var campgroundName = response.name
+      var campgroundOne = $("<div>").addClass("ajaxResponse col-md-6").text(campgroundName)
+      
+      console.log(campgroundOne)
     })
-});
+  };
+    
 
 
