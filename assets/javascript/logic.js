@@ -104,7 +104,7 @@ function campground() {
     
 
       // This variable stores the result of the checkAmenities function, which will be a true or false (Boolean)
-      var shouldDisplay = checkAmenities(campResults[i]);
+    var shouldDisplay = checkAmenities(campResults[i]);
      console.log(shouldDisplay)
      console.log(amenitiesArray)
       if (shouldDisplay == true) {
@@ -145,9 +145,6 @@ function checkAmenities(campGroundObject) {
   if (amenitiesArray.includes("firewood") && !campGroundObject.amenities.firewoodforsale.includes("Yes")) {
     return false;
   } else {
-    return true;
-  }
-  if (amenitiesArray = []) {
     return true;
   }
 }
@@ -221,3 +218,4 @@ if(day < 10)
 var minDate = year + '-' + month + '-' + day;
 $(".date").attr("min", minDate);
 
+}
