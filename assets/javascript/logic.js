@@ -77,7 +77,7 @@ function campground() {
     console.log(response)
     var campResults = response.data;
     for (var i = 0; i < campResults.length; i++) {
-      
+      $("#display-campsites").show();
       
       var campgroundName = campResults[i].name;
       var campgroundNameUrl = campgroundName.replace(/\s+/g, '').toLowerCase();
@@ -107,10 +107,16 @@ function campground() {
         campsite.append(directionsButton, informationButton);
         $("#append-here").append(campsite);
         console.log(campResults)
-      } $("#display-campsites").show();
+      } else if (shouldDisplay == false) {
+        console.log("in the else if")
+        var errorDiv = $("<div class='col-md-12' id='error-message'>");
+        errorDiv.append("<h3 class='row container-fluid bg-light text-primary mx-auto text-center justify-content-center border border-right-0 border-left-0 border-primary rounded'> Sorry, no campgrounds match your parameters. Please search again. </h3>");
+        $("#append-here").append(errorDiv);
+        return;
+      } 
     } 
   });
-
+};
   
 // This function takes campResults[i] defined as campGroundObject and confirms that both the amenitiesArray and the campResults array include the user's search parameters. If they don't BOTH include a chosen amenity then this will return false and filter that campground out.
 function checkAmenities(campGroundObject) {
@@ -119,11 +125,9 @@ function checkAmenities(campGroundObject) {
   if ((amenitiesArray.includes("showers") && !campGroundObject.amenities.showers[0].toLowerCase().includes("yes - seasonal")) &&    (amenitiesArray.includes("showers") && !campGroundObject.amenities.showers[0].toLowerCase().includes("yes - year round"))) {
     return false;
   } 
-  
   if ((amenitiesArray.includes("toilets") && !campGroundObject.amenities.toilets[0].toLowerCase().includes("flush toilets - seasonal")) && (amenitiesArray.includes("toilets") && !campGroundObject.amenities.toilets[0].toLowerCase().includes("flush toilets - year round") ) && (amenitiesArray.includes("toilets") && !campGroundObject.amenities.toilets[0].toLowerCase().includes("vault toilets - year round"))) {
     return false;
   } 
-  
   if (amenitiesArray.includes("trash") && !campGroundObject.amenities.trashrecyclingcollection.includes("Yes")) {
     return false;
   }
@@ -138,7 +142,7 @@ function checkAmenities(campGroundObject) {
   } else {
     return true;
   }
-}
+};
 
 // Reset button to clear current search results and form input fields/checkboxes
 $("#reset").on("click", function() {
@@ -149,7 +153,6 @@ $("#reset").on("click", function() {
   }); 
   $(".custom-control-input").attr("data-check", "false");
   $("#display-campsites").hide();
-  
 });
 
 
@@ -157,25 +160,27 @@ $("#reset").on("click", function() {
 function getWeather(parkLatLong) {
 
   var latLongArray = parkLatLong.split(/[:,]+/g);
-  var startDate = $('#start-date').val().trim();
 
-  var startMoment = moment(startDate, 'YYYY-DD-MM');
+  var startDate = $('#start-date').val().trim();
+  var startMoment = moment(startDate, 'YYYY-MM-DD');
 
   var endDate = $('#end-date').val().trim();
-  var endMoment = moment(endDate, 'YYYY-DD-MM');
-
-  var dateRange = startMoment.diff(endMoment, 'days')
+  var endMoment = moment(endDate, 'YYYY-MM-DD');
+  startMoment.format('MM/DD/YYYY');
+  endMoment.format('MM/DD/YYYY');
+  var dateRange = endMoment.diff(startMoment, 'days');
   var latLongString = '/' + latLongArray[1] + "," + latLongArray[3];
   var darkskyKey = "24ad87e96d744bd3fb31284ccc8763a1"
   var weatherUrl = "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/" + darkskyKey + latLongString;
-//  console.log(dateRange)
   // clear out values
   //$('#location').val('');
-  for(var i = 0; i < dateRange; i++){
-
+  for(var i = 0; i < dateRange +1; i++){
+    console.log(startMoment.add(i, 'days').format('X'))//.calendar());
+    
+   // console.log(startMoment.clone().add(i, 'days'))
     $.ajax({
       method: 'GET',
-      url: weatherUrl
+      url: weatherUrl + ',' + startMoment.add(i, 'days').format('X')
     }).then(function (response) {
       var high = response.daily.data[0].temperatureHigh;
       var low = response.daily.data[0].temperatureLow;
@@ -192,6 +197,7 @@ function getWeather(parkLatLong) {
       // $("#append-weather-here").append("");
 
     });
+    startMoment.subtract(i, 'days');
   }
 }
   
@@ -209,4 +215,3 @@ if(day < 10)
 var minDate = year + '-' + month + '-' + day;
 $(".date").attr("min", minDate);
 
-}
