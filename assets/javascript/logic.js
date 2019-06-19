@@ -1,7 +1,7 @@
 // Initially hide div where campsite info will be dynamically populated
 window.onload = function() {  
   $("#display-campsites").hide();
-  $(".weather").hide();
+  $(".weather-header").hide();
 };
 
 // User selections will be pushed to this array
@@ -18,6 +18,7 @@ $(".custom-control-input").on("click", function () {
 });
 var parkCode;
 var parkLatLong;
+
 
 // When user clicks submit, their amenities selections will be pushed to amenitiesArray and their search location will be formatted such that the campground API can use it
 $("#submit").on("click", function (event) {
@@ -84,26 +85,56 @@ function campground() {
       var campgroundDescription = campResults[i].description;
       var campgroundInfoUrl = campResults[i].regulationsurl;
       var campgroundDirections = campResults[i].directionsUrl;
+
+      // This variable stores the result of the checkAmenities function, which will be a true or false (Boolean)
+      var shouldDisplay = checkAmenities(campResults[i]);
       //
       var informationButton = $("<a href='https://www.nps.gov/zion/planyourvisit/" + campgroundName +".htm' target='_blank'> Information </a>").addClass("btn btn-primary");
       // south-campground.htm
       // " + campgroundInfoUrl + " target='_blank'> Information </a>").addClass("btn btn-primary");
       //
-      var directionsButton = $("<a id='dynamic-button' href=" + campgroundDirections + " target='_blank'> Directions </a>").addClass("btn btn-primary");
-      var campsite = $("<div>").addClass("ajaxResponse col-md-12");
-      campsite.append("<h3 class='row container-fluid bg-light text-primary mx-auto justify-content-center border border-right-0 border-left-0 border-primary rounded'>" + campgroundName + "</h3>")
-      campsite.append("<p id='dynamic-p'>"  + campgroundDescription + "</p>");
-      campsite.append(directionsButton, informationButton);
-      $("#append-here").append(campsite);
-    }
-    // append these divs to soon to be created row
+      if (shouldDisplay == true) {
+        var directionsButton = $("<a id='dynamic-button' href=" + campgroundDirections + " target='_blank'> Directions </a>").addClass("btn btn-primary");
+        var campsite = $("<div>").addClass("ajaxResponse col-md-12");
+        campsite.append("<h3 class='row container-fluid bg-light text-primary mx-auto justify-content-center border border-right-0 border-left-0 border-primary rounded'>" + campgroundName + "</h3>")
+        campsite.append("<p id='dynamic-p'>"  + campgroundDescription + "</p>");
+        campsite.append(directionsButton, informationButton);
+        $("#append-here").append(campsite);
+      }
+    } console.log(response);
   });
+}
+
+// This function takes campResults[i] defined as campGroundObject and confirms that both the amenitiesArray and the campResults array include the user's search parameters. If they don't BOTH include a chosen amenity then this will return false and filter that campground out.
+function checkAmenities(campGroundObject) {
+  if (amenitiesArray.includes("showers") && !campGroundObject.amenities.showers.includes("Yes - seasonal") || !campGroundObject.amenities.showers.includes("Yes - year round")) {
+    return false;
+  }
+  if (amenitiesArray.includes("toilets") && !campGroundObject.amenities.toilets.includes("Flush toilets - seasonal") || !campGroundObject.amenities.toilets.includes("Flush toilets - year round") || !campGroundObject.amenities.toilets.includes("Vault toilets - year round")) {
+    return false;
+  }
+  if (amenitiesArray.includes("trash") && !campGroundObject.amenities.trashrecyclingcollection.includes("Yes")) {
+    return false;
+  }
+  if (amenitiesArray.includes("foodStorage") && !campGroundObject.amenities.foodstoragelockers.includes("Yes")) {
+    return false;
+  }
+  if (amenitiesArray.includes("water") && !campGroundObject.amenities.potablewater.includes("Yes - seasonal") || !campGroundObject.amenities.potablewater.includes("Yes - year round")) {
+    return false;
+  }
+  if (amenitiesArray.includes("firewood") && !campGroundObject.amenities.firewoodforsale.includes("Yes")) {
+    return false;
+  }
 }
 
 // Reset button to clear current search results and form input fields/checkboxes
 $("#reset").on("click", function() {
   $("#append-here").empty();
   $("input").val("");
+  $('input[type=checkbox]').each(function() { 
+      this.checked = false; 
+  }); 
+  $(".custom-control-input").attr("data-check", "false");
   $("#display-campsites").hide();
   
 });
@@ -138,6 +169,11 @@ function getWeather(parkLatLong) {
       var precip = response.daily.data[0].precipProbability;
       var wind = response.daily.data[0].windSpeed;
       
+      // $(".weather-header").show();
+      // var forecast = $("<div ")
+
+      // $("#append-weather-here").append("");
+
     });
   }
 }
