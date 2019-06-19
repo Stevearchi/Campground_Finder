@@ -72,24 +72,25 @@ function campground() {
    
     for (var i = 0; i < campResults.length; i++) {
       $("#display-campsites").show();
+      
       var campgroundName = campResults[i].name;
-      campgroundName = campgroundName.replace(/\s+g, '');
+      var campgroundNameUrl = campgroundName.replace(/\s+/g, '').toLowerCase();
       var campgroundDescription = campResults[i].description;
       var campgroundInfoUrl = campResults[i].regulationsurl;
       var campgroundDirections = campResults[i].directionsUrl;
-      //
-      var informationButton = $("<a href='https://www.nps.gov/zion/planyourvisit/" + campgroundName +".htm' target='_blank'> Information </a>").addClass("btn btn-primary");
-      // south-campground.htm
-      // " + campgroundInfoUrl + " target='_blank'> Information </a>").addClass("btn btn-primary");
-      //
-      var directionsButton = $("<a href=" + campgroundDirections + " target='_blank'> Directions </a>").addClass("btn btn-primary");
+      if (campgroundInfoUrl === "") {
+        var informationButton = $("<a href='https://www.nps.gov/" + parkCode + "/planyourvisit/camping-regulations.htm' target='_blank'> Information </a>").addClass("btn btn-primary");
+      } 
+      if (campgroundDirections === "") {
+        var directionsButton = $("<a href='https://www.nps.gov/" + parkCode + "/planyourvisit/directions.htm' target='_blank'> Directions </a>").addClass("btn btn-primary");
+      }
       var campsite = $("<div>").addClass("ajaxResponse col-md-12 border-bottom border-primary");
       campsite.append("<h2>" + campgroundName + "</h2>")
       campsite.append("<p>"  + campgroundDescription + "</p>");
       campsite.append(directionsButton, informationButton);
       $("#append-here").append(campsite);
     }
-    // append these divs to soon to be created row
+    // if we decide we want to either offer a link (if its unique), or offer nothing, we would just adjust the logic 
   });
 }
 
