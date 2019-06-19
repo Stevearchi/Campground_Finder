@@ -42,9 +42,6 @@ $("#submit").on("click", function (event) {
   if ($("#firewood").attr("data-check") === "true") {
     amenitiesArray.push($("#firewood").attr("id"));
   }
-
-
-
   var parkName = $("#location")
     .val()
     .trim();
@@ -77,53 +74,78 @@ function campground() {
     url: campgroundUrl,
     method: "GET"
   }).then(function (response) {
+    console.log(response)
     var campResults = response.data;
     for (var i = 0; i < campResults.length; i++) {
       $("#display-campsites").show();
+      
       var campgroundName = campResults[i].name;
-      campgroundName = campgroundName.replace(/\s+/g, '-');
+      var campgroundNameUrl = campgroundName.replace(/\s+/g, '').toLowerCase();
       var campgroundDescription = campResults[i].description;
       var campgroundInfoUrl = campResults[i].regulationsurl;
       var campgroundDirections = campResults[i].directionsUrl;
+    //   if (campgroundInfoUrl === "") {
+    //     var informationButton = $("<a id='dynamic-button' href='https://www.nps.gov/" + parkCode + "/planyourvisit/camping-regulations.htm' target='_blank'> Information </a>").addClass("btn btn-primary");
+    //   } else {
+    //      informationButton = $("<a id='dynamic-button' href=" + campgroundInfoUrl + " target='_blank'> Information </a>").addClass("btn btn-primary");
+    //   }
+    //   if (campgroundDirections === "") {
+    //     var directionsButton = $("<a id='dynamic-button' href='https://www.nps.gov/" + parkCode + "/planyourvisit/directions.htm' target='_blank'> Directions </a>").addClass("btn btn-primary");
+    //   } else {
+    //      directionsButton = $("<a id='dynamic-button' href=" + campgroundDirections + " target='_blank'> Directions </a>").addClass("btn btn-primary");
+    //   }
+    //   var campsite = $("<div>").addClass("ajaxResponse col-md-12 border-bottom border-primary");
+    //   // campsite.append("<h2>" + campgroundName + "</h2>")
+    //   // campsite.append("<p>"  + campgroundDescription + "</p>");
+    //   // campsite.append(directionsButton, informationButton);
+    //   // $("#append-here").append(campsite);
+    // }
+    // if we decide we want to either offer a link (if its unique), or offer nothing, we would just adjust the logic in lines 86-95 above
+    
 
       // This variable stores the result of the checkAmenities function, which will be a true or false (Boolean)
       var shouldDisplay = checkAmenities(campResults[i]);
-      //
-      var informationButton = $("<a href='https://www.nps.gov/zion/planyourvisit/" + campgroundName +".htm' target='_blank'> Information </a>").addClass("btn btn-primary");
-      // south-campground.htm
-      // " + campgroundInfoUrl + " target='_blank'> Information </a>").addClass("btn btn-primary");
-      //
+     console.log(shouldDisplay)
+     console.log(amenitiesArray)
       if (shouldDisplay == true) {
-        var directionsButton = $("<a id='dynamic-button' href=" + campgroundDirections + " target='_blank'> Directions </a>").addClass("btn btn-primary");
+        console.log("hello!")
+        // var directionsButton = $("<a id='dynamic-button' href=" + campgroundDirections + " target='_blank'> Directions </a>").addClass("btn btn-primary");
         var campsite = $("<div>").addClass("ajaxResponse col-md-12");
         campsite.append("<h3 class='row container-fluid bg-light text-primary mx-auto justify-content-center border border-right-0 border-left-0 border-primary rounded'>" + campgroundName + "</h3>")
         campsite.append("<p id='dynamic-p'>"  + campgroundDescription + "</p>");
-        campsite.append(directionsButton, informationButton);
+        // campsite.append(directionsButton, informationButton);
         $("#append-here").append(campsite);
+        console.log(campResults)
       }
-    } console.log(response);
+    } 
   });
-}
 
+  
 // This function takes campResults[i] defined as campGroundObject and confirms that both the amenitiesArray and the campResults array include the user's search parameters. If they don't BOTH include a chosen amenity then this will return false and filter that campground out.
 function checkAmenities(campGroundObject) {
-  if (amenitiesArray.includes("showers") && !campGroundObject.amenities.showers[0].includes("Yes - seasonal") || !campGroundObject.amenities.showers[0].includes("Yes - year round")) {
+
+  
+  if ((amenitiesArray.includes("showers") && !campGroundObject.amenities.showers[0].includes("Yes - seasonal")) &&    (amenitiesArray.includes("showers") && !campGroundObject.amenities.showers[0].includes("Yes - year round"))) {
     return false;
-  }
-  if (amenitiesArray.includes("toilets") && !campGroundObject.amenities.toilets[0].includes("Flush toilets - seasonal") || !campGroundObject.amenities.toilets[0].includes("Flush toilets - year round") || !campGroundObject.amenities.toilets[0].includes("Vault toilets - year round")) {
+  } 
+  
+  if ((amenitiesArray.includes("toilets") && !campGroundObject.amenities.toilets[0].includes("Flush toilets - seasonal")) && (amenitiesArray.includes("toilets") && !campGroundObject.amenities.toilets[0].includes("Flush toilets - year round") ) && (amenitiesArray.includes("toilets") && !campGroundObject.amenities.toilets[0].includes("Vault Toilets - year round"))) {
     return false;
-  }
+  } 
+  
   if (amenitiesArray.includes("trash") && !campGroundObject.amenities.trashrecyclingcollection.includes("Yes")) {
     return false;
   }
   if (amenitiesArray.includes("foodStorage") && !campGroundObject.amenities.foodstoragelockers.includes("Yes")) {
     return false;
   }
-  if (amenitiesArray.includes("water") && !campGroundObject.amenities.potablewater[0].includes("Yes - seasonal") || !campGroundObject.amenities.potablewater[0].includes("Yes - year round")) {
+  if ((amenitiesArray.includes("water") && !campGroundObject.amenities.potablewater[0].includes("Yes - seasonal")) && (amenitiesArray.includes("water") && !campGroundObject.amenities.potablewater[0].includes("Yes - year round"))) {
     return false;
   }
   if (amenitiesArray.includes("firewood") && !campGroundObject.amenities.firewoodforsale.includes("Yes")) {
     return false;
+  } else {
+    return true;
   }
   if (amenitiesArray = []) {
     return true;
@@ -184,7 +206,7 @@ function getWeather(parkLatLong) {
     });
   }
 }
-
+  
 
 // Datepicker to allow only current and future date selections by user //
 var today = new Date();
@@ -198,3 +220,4 @@ if(day < 10)
 
 var minDate = year + '-' + month + '-' + day;
 $(".date").attr("min", minDate);
+
