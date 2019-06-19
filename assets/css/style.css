@@ -18,17 +18,30 @@ h1 {
 
 
 /* Campsite div styles */
+#display-campsites{
+  padding: 0;
+}
+.ajaxResponse {
+  padding: 0;
+}
+
 #display-campsites a {
     text-decoration: none;
     color: white;
 }
 
-h2 {
-  padding-top: 10px;
+#dynamic-p, #dynamic-button {
+  margin-left: 5px;
+}
+
+h3 {
+  font-family: 'Adamina', serif;
+  padding: 10px;
 }
 
 .btn {
-  margin: 0px 5px 5px;
+  margin-right: 10px;
+  margin-bottom: 10px;
 }
 
 /* Search card styles */
