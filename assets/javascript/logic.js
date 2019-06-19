@@ -103,25 +103,28 @@ $("#reset").on("click", function() {
 function getWeather(parkLatLong) {
 
   var latLongArray = parkLatLong.split(/[:,]+/g);
-  var startDate = $('#start-date').val().trim();
 
-  var startMoment = moment(startDate, 'YYYY-DD-MM');
+  var startDate = $('#start-date').val().trim();
+  var startMoment = moment(startDate, 'YYYY-MM-DD');
 
   var endDate = $('#end-date').val().trim();
-  var endMoment = moment(endDate, 'YYYY-DD-MM');
-
-  var dateRange = startMoment.diff(endMoment, 'days')
+  var endMoment = moment(endDate, 'YYYY-MM-DD');
+  startMoment.format('MM/DD/YYYY');
+  endMoment.format('MM/DD/YYYY');
+  var dateRange = endMoment.diff(startMoment, 'days');
   var latLongString = '/' + latLongArray[1] + "," + latLongArray[3];
   var darkskyKey = "24ad87e96d744bd3fb31284ccc8763a1"
   var weatherUrl = "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/" + darkskyKey + latLongString;
- console.log(dateRange)
+
   // clear out values
   //$('#location').val('');
-  for(var i = 0; i < dateRange; i++){
-
+  for(var i = 0; i < dateRange +1; i++){
+    console.log(startMoment.add(i, 'days').format('X'))//.calendar());
+    
+   // console.log(startMoment.clone().add(i, 'days'))
     $.ajax({
       method: 'GET',
-      url: weatherUrl
+      url: weatherUrl + ',' + startMoment.add(i, 'days').format('X')
     }).then(function (response) {
       var high = response.daily.data[0].temperatureHigh;
       var low = response.daily.data[0].temperatureLow;
@@ -129,5 +132,6 @@ function getWeather(parkLatLong) {
       var wind = response.daily.data[0].windSpeed;
       
     });
+    startMoment.subtract(i, 'days');
   }
 }
