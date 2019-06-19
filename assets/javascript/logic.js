@@ -77,26 +77,13 @@ function campground() {
     console.log(response)
     var campResults = response.data;
     for (var i = 0; i < campResults.length; i++) {
-      $("#display-campsites").show();
+      
       
       var campgroundName = campResults[i].name;
       var campgroundNameUrl = campgroundName.replace(/\s+/g, '').toLowerCase();
       var campgroundDescription = campResults[i].description;
       var campgroundInfoUrl = campResults[i].regulationsurl;
       var campgroundDirections = campResults[i].directionsUrl;
-      if (campgroundInfoUrl === "") {
-        var informationButton = $("<a id='dynamic-button' href='https://www.nps.gov/" + parkCode + "/planyourvisit/camping-regulations.htm' target='_blank'> Information </a>").addClass("btn btn-primary");
-      } else {
-         informationButton = $("<a id='dynamic-button' href=" + campgroundInfoUrl + " target='_blank'> Information </a>").addClass("btn btn-primary");
-      }
-      if (campgroundDirections === "") {
-        var directionsButton = $("<a id='dynamic-button' href='https://www.nps.gov/" + parkCode + "/planyourvisit/directions.htm' target='_blank'> Directions </a>").addClass("btn btn-primary");
-      } else {
-         directionsButton = $("<a id='dynamic-button' href=" + campgroundDirections + " target='_blank'> Directions </a>").addClass("btn btn-primary");
-      }
-      var campsite = $("<div>").addClass("ajaxResponse col-md-12 border-bottom border-primary");
- 
-    // if we decide we want to either offer a link (if its unique), or offer nothing, we would just adjust the logic in lines 86-95 above
     
 
       // This variable stores the result of the checkAmenities function, which will be a true or false (Boolean)
@@ -120,7 +107,7 @@ function campground() {
         campsite.append(directionsButton, informationButton);
         $("#append-here").append(campsite);
         console.log(campResults)
-      }
+      } $("#display-campsites").show();
     } 
   });
 
