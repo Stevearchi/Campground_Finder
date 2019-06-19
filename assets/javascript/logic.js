@@ -107,10 +107,10 @@ function campground() {
 
 // This function takes campResults[i] defined as campGroundObject and confirms that both the amenitiesArray and the campResults array include the user's search parameters. If they don't BOTH include a chosen amenity then this will return false and filter that campground out.
 function checkAmenities(campGroundObject) {
-  if (amenitiesArray.includes("showers") && !campGroundObject.amenities.showers.includes("Yes - seasonal") || !campGroundObject.amenities.showers.includes("Yes - year round")) {
+  if (amenitiesArray.includes("showers") && !campGroundObject.amenities.showers[0].includes("Yes - seasonal") || !campGroundObject.amenities.showers[0].includes("Yes - year round")) {
     return false;
   }
-  if (amenitiesArray.includes("toilets") && !campGroundObject.amenities.toilets.includes("Flush toilets - seasonal") || !campGroundObject.amenities.toilets.includes("Flush toilets - year round") || !campGroundObject.amenities.toilets.includes("Vault toilets - year round")) {
+  if (amenitiesArray.includes("toilets") && !campGroundObject.amenities.toilets[0].includes("Flush toilets - seasonal") || !campGroundObject.amenities.toilets[0].includes("Flush toilets - year round") || !campGroundObject.amenities.toilets[0].includes("Vault toilets - year round")) {
     return false;
   }
   if (amenitiesArray.includes("trash") && !campGroundObject.amenities.trashrecyclingcollection.includes("Yes")) {
@@ -119,11 +119,14 @@ function checkAmenities(campGroundObject) {
   if (amenitiesArray.includes("foodStorage") && !campGroundObject.amenities.foodstoragelockers.includes("Yes")) {
     return false;
   }
-  if (amenitiesArray.includes("water") && !campGroundObject.amenities.potablewater.includes("Yes - seasonal") || !campGroundObject.amenities.potablewater.includes("Yes - year round")) {
+  if (amenitiesArray.includes("water") && !campGroundObject.amenities.potablewater[0].includes("Yes - seasonal") || !campGroundObject.amenities.potablewater[0].includes("Yes - year round")) {
     return false;
   }
   if (amenitiesArray.includes("firewood") && !campGroundObject.amenities.firewoodforsale.includes("Yes")) {
     return false;
+  }
+  if (amenitiesArray = []) {
+    return true;
   }
 }
 
@@ -155,7 +158,7 @@ function getWeather(parkLatLong) {
   var latLongString = '/' + latLongArray[1] + "," + latLongArray[3];
   var darkskyKey = "24ad87e96d744bd3fb31284ccc8763a1"
   var weatherUrl = "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/" + darkskyKey + latLongString;
- console.log(dateRange)
+//  console.log(dateRange)
   // clear out values
   //$('#location').val('');
   for(var i = 0; i < dateRange; i++){
