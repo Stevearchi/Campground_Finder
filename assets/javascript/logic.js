@@ -84,22 +84,18 @@ function campground() {
       var campgroundDescription = campResults[i].description;
       var campgroundInfoUrl = campResults[i].regulationsurl;
       var campgroundDirections = campResults[i].directionsUrl;
-    //   if (campgroundInfoUrl === "") {
-    //     var informationButton = $("<a id='dynamic-button' href='https://www.nps.gov/" + parkCode + "/planyourvisit/camping-regulations.htm' target='_blank'> Information </a>").addClass("btn btn-primary");
-    //   } else {
-    //      informationButton = $("<a id='dynamic-button' href=" + campgroundInfoUrl + " target='_blank'> Information </a>").addClass("btn btn-primary");
-    //   }
-    //   if (campgroundDirections === "") {
-    //     var directionsButton = $("<a id='dynamic-button' href='https://www.nps.gov/" + parkCode + "/planyourvisit/directions.htm' target='_blank'> Directions </a>").addClass("btn btn-primary");
-    //   } else {
-    //      directionsButton = $("<a id='dynamic-button' href=" + campgroundDirections + " target='_blank'> Directions </a>").addClass("btn btn-primary");
-    //   }
-    //   var campsite = $("<div>").addClass("ajaxResponse col-md-12 border-bottom border-primary");
-    //   // campsite.append("<h2>" + campgroundName + "</h2>")
-    //   // campsite.append("<p>"  + campgroundDescription + "</p>");
-    //   // campsite.append(directionsButton, informationButton);
-    //   // $("#append-here").append(campsite);
-    // }
+      if (campgroundInfoUrl === "") {
+        var informationButton = $("<a id='dynamic-button' href='https://www.nps.gov/" + parkCode + "/planyourvisit/camping-regulations.htm' target='_blank'> Information </a>").addClass("btn btn-primary");
+      } else {
+         informationButton = $("<a id='dynamic-button' href=" + campgroundInfoUrl + " target='_blank'> Information </a>").addClass("btn btn-primary");
+      }
+      if (campgroundDirections === "") {
+        var directionsButton = $("<a id='dynamic-button' href='https://www.nps.gov/" + parkCode + "/planyourvisit/directions.htm' target='_blank'> Directions </a>").addClass("btn btn-primary");
+      } else {
+         directionsButton = $("<a id='dynamic-button' href=" + campgroundDirections + " target='_blank'> Directions </a>").addClass("btn btn-primary");
+      }
+      var campsite = $("<div>").addClass("ajaxResponse col-md-12 border-bottom border-primary");
+ 
     // if we decide we want to either offer a link (if its unique), or offer nothing, we would just adjust the logic in lines 86-95 above
     
 
@@ -108,12 +104,20 @@ function campground() {
      console.log(shouldDisplay)
      console.log(amenitiesArray)
       if (shouldDisplay == true) {
-        console.log("hello!")
-        // var directionsButton = $("<a id='dynamic-button' href=" + campgroundDirections + " target='_blank'> Directions </a>").addClass("btn btn-primary");
+        if (campgroundInfoUrl === "") {
+          var informationButton = $("<a id='dynamic-button' href='https://www.nps.gov/" + parkCode + "/planyourvisit/index.htm' target='_blank'> Information </a>").addClass("btn btn-primary");
+        } else {
+           informationButton = $("<a id='dynamic-button' href=" + campgroundInfoUrl + " target='_blank'> Information </a>").addClass("btn btn-primary");
+        }
+        if (campgroundDirections === "") {
+          var directionsButton = $("<a id='dynamic-button' href='https://www.nps.gov/" + parkCode + "/planyourvisit/directions.htm' target='_blank'> Directions </a>").addClass("btn btn-primary");
+        } else {
+           directionsButton = $("<a id='dynamic-button' href=" + campgroundDirections + " target='_blank'> Directions </a>").addClass("btn btn-primary");
+        }
         var campsite = $("<div>").addClass("ajaxResponse col-md-12");
         campsite.append("<h3 class='row container-fluid bg-light text-primary mx-auto justify-content-center border border-right-0 border-left-0 border-primary rounded'>" + campgroundName + "</h3>")
         campsite.append("<p id='dynamic-p'>"  + campgroundDescription + "</p>");
-        // campsite.append(directionsButton, informationButton);
+        campsite.append(directionsButton, informationButton);
         $("#append-here").append(campsite);
         console.log(campResults)
       }
@@ -125,11 +129,11 @@ function campground() {
 function checkAmenities(campGroundObject) {
 
   
-  if ((amenitiesArray.includes("showers") && !campGroundObject.amenities.showers[0].includes("Yes - seasonal")) &&    (amenitiesArray.includes("showers") && !campGroundObject.amenities.showers[0].includes("Yes - year round"))) {
+  if ((amenitiesArray.includes("showers") && !campGroundObject.amenities.showers[0].toLowerCase().includes("yes - seasonal")) &&    (amenitiesArray.includes("showers") && !campGroundObject.amenities.showers[0].toLowerCase().includes("yes - year round"))) {
     return false;
   } 
   
-  if ((amenitiesArray.includes("toilets") && !campGroundObject.amenities.toilets[0].includes("Flush toilets - seasonal")) && (amenitiesArray.includes("toilets") && !campGroundObject.amenities.toilets[0].includes("Flush toilets - year round") ) && (amenitiesArray.includes("toilets") && !campGroundObject.amenities.toilets[0].includes("Vault Toilets - year round"))) {
+  if ((amenitiesArray.includes("toilets") && !campGroundObject.amenities.toilets[0].toLowerCase().includes("flush toilets - seasonal")) && (amenitiesArray.includes("toilets") && !campGroundObject.amenities.toilets[0].toLowerCase().includes("flush toilets - year round") ) && (amenitiesArray.includes("toilets") && !campGroundObject.amenities.toilets[0].toLowerCase().includes("vault toilets - year round"))) {
     return false;
   } 
   
@@ -139,7 +143,7 @@ function checkAmenities(campGroundObject) {
   if (amenitiesArray.includes("foodStorage") && !campGroundObject.amenities.foodstoragelockers.includes("Yes")) {
     return false;
   }
-  if ((amenitiesArray.includes("water") && !campGroundObject.amenities.potablewater[0].includes("Yes - seasonal")) && (amenitiesArray.includes("water") && !campGroundObject.amenities.potablewater[0].includes("Yes - year round"))) {
+  if ((amenitiesArray.includes("water") && !campGroundObject.amenities.potablewater[0].toLowerCase().includes("yes - seasonal")) && (amenitiesArray.includes("water") && !campGroundObject.amenities.potablewater[0].toLowerCase().includes("yes - year round"))) {
     return false;
   }
   if (amenitiesArray.includes("firewood") && !campGroundObject.amenities.firewoodforsale.includes("Yes")) {
