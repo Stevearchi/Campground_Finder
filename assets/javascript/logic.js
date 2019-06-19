@@ -213,7 +213,7 @@ function checkAmenities(campGroundObject) {
   } else {
     return true;
   }
-}
+};
 
 // Reset button to clear current search results and form input fields/checkboxes
 $("#reset").on("click", function() {
