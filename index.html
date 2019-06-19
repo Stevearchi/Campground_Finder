@@ -28,8 +28,9 @@
     <header>
         <div class="jumbotron jumbotron-fluid text-primary text-center border border-primary rounded">
             <div class="container header">
-                <h1 class="display-2" id="jumbo-title">Our Site Name Here</h1>
-                <p class="lead" id="jumbo-lead">This is for our site description so that the user knows what to do.</p>
+                <h1 class="display-2" id="jumbo-title">Park It Here</h1>
+                <p class="lead" id="jumbo-lead">Search a national park for campsites with the amenities of your choice.
+                </p>
             </div>
         </div>
     </header>
@@ -65,7 +66,7 @@
                         <div class="form-group">
                             <label class="col-form-label col-form-label-sm" for="inputDate" id="search-label">Start
                                 Date:</label>
-                            <input class="form-control form-control-sm text-primary" type="date" id="start-date">
+                            <input class="form-control form-control-sm text-primary date" type="date" id="start-date">
                         </div>
                     </div>
                     <!-- End date form field -->
@@ -73,7 +74,7 @@
                         <div class="form-group">
                             <label class="col-form-label col-form-label-sm" for="inputDate" id="search-label">End
                                 Date:</label>
-                            <input class="form-control form-control-sm text-primary" type="date" id="end-date">
+                            <input class="form-control form-control-sm text-primary date" type="date" id="end-date">
                         </div>
                     </div>
                 </div>
@@ -146,7 +147,6 @@
                     </div>
                 </div>
                 <!-- Submit and Reset Buttons -->
-                
                 <div class="row border-left border-right border-primary search-card-border">
                     <div class="col-md-3">
                         <button type="submit" class="btn btn-primary" id="submit">Submit</button>
@@ -169,82 +169,13 @@
                         <p>Weather Forecast</p>
                     </div>
                 </div>
-                <div class="row" id = "weather">
-                    <div class="col-md-6 border border-primary">
-                        <!-- Date Heading -->
-                        <div class="row text-primary text-center weather">
-                            <div class="col-md-12 bg-white border-bottom border-primary">
-                                <p id = 'date'>MM/DD</p>
-                            </div>
-                        </div>
-                        <!-- Weather data unordered list -->
-                        <div class="row weather">
-                            <div class="col-md-12">
-                                <ul>
-                                    <li id = 'hi'>Hi:</li>
-                                    <li id = 'lo'>Lo:</li>
-                                    <li id = 'precip'>Precip:</li>
-                                    <li id = 'wind'>Wind:</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 border border-primary">
-                        <div class="row text-primary text-center weather">
-                            <div class="col-md-12 bg-white border-bottom border-primary">
-                                <p>MM/DD</p>
-                            </div>
-                        </div>
-                        <div class="row weather">
-                            <div class="col-md-12">
-                                <ul>
-                                    <li>Hi:</li>
-                                    <li>Lo:</li>
-                                    <li>Precip:</li>
-                                    <li>Wind:</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-               
-                    <div class="col-md-6 border border-primary">
-                        <div class="row text-primary text-center weather">
-                            <div class="col-md-12 bg-white border-bottom border-primary">
-                                <p>MM/DD</p>
-                            </div>
-                        </div>
-                        <div class="row weather">
-                            <div class="col-md-12">
-                                <ul>
-                                    <li>Hi:</li>
-                                    <li>Lo:</li>
-                                    <li>Precip:</li>
-                                    <li>Wind:</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 border border-primary">
-                        <div class="row text-primary text-center weather">
-                            <div class="col-md-12 bg-white border-bottom border-primary">
-                                <p>MM/DD</p>
-                            </div>
-                        </div>
-                        <div class="row weather">
-                            <div class="col-md-12">
-                                <ul>
-                                    <li>Hi:</li>
-                                    <li>Lo:</li>
-                                    <li>Precip:</li>
-                                    <li>Wind:</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="row" id="append-weather-here">
+                
+                </div> 
             </div>
             <!-- Campground Display Div Placeholder (to be dynamically populated)-->
-            <div class="col-xs-12 col-sm-8 col-md-8 offset-md-1 border border-primary rounded" id="display-campsites">
+            <div class="col-xs-12 col-sm-8 col-md-8 offset-md-1 border border-top-0 border-primary rounded"
+                id="display-campsites">
                 <div class="row" id="append-here">
 
                 </div>
