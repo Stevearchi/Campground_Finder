@@ -155,6 +155,7 @@ function checkAmenities(campGroundObject) {
     return true;
   }
 }
+};
 
 // Reset button to clear current search results and form input fields/checkboxes
 function reset() {
@@ -229,4 +230,3 @@ if(day < 10)
 var minDate = year + '-' + month + '-' + day;
 $(".date").attr("min", minDate);
 
-}
