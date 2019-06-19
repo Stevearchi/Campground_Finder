@@ -169,8 +169,12 @@ function getWeather(parkLatLong) {
       var precip = response.daily.data[0].precipProbability;
       var wind = response.daily.data[0].windSpeed;
       
+
+      // starting to think through getting this in the HTML - the formatting will be a little tough due to nested rows and columns. Will try to simplify tomorrow 6/19 - Carolyn
       // $(".weather-header").show();
-      // var forecast = $("<div ")
+      // var newRow = $("<div>").addClass("col-md-6 border border-primary weather");
+      // var nestedCol = 
+      // var nestedRow = 
 
       // $("#append-weather-here").append("");
 
