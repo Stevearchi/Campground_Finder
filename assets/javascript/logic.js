@@ -84,23 +84,10 @@ function campground() {
       var campgroundDescription = campResults[i].description;
       var campgroundInfoUrl = campResults[i].regulationsurl;
       var campgroundDirections = campResults[i].directionsUrl;
-      if (campgroundInfoUrl === "") {
-        var informationButton = $("<a id='dynamic-button' href='https://www.nps.gov/" + parkCode + "/planyourvisit/camping-regulations.htm' target='_blank'> Information </a>").addClass("btn btn-primary");
-      } else {
-         informationButton = $("<a id='dynamic-button' href=" + campgroundInfoUrl + " target='_blank'> Information </a>").addClass("btn btn-primary");
-      }
-      if (campgroundDirections === "") {
-        var directionsButton = $("<a id='dynamic-button' href='https://www.nps.gov/" + parkCode + "/planyourvisit/directions.htm' target='_blank'> Directions </a>").addClass("btn btn-primary");
-      } else {
-         directionsButton = $("<a id='dynamic-button' href=" + campgroundDirections + " target='_blank'> Directions </a>").addClass("btn btn-primary");
-      }
-      var campsite = $("<div>").addClass("ajaxResponse col-md-12 border-bottom border-primary");
- 
-    // if we decide we want to either offer a link (if its unique), or offer nothing, we would just adjust the logic in lines 86-95 above
     
 
       // This variable stores the result of the checkAmenities function, which will be a true or false (Boolean)
-      var shouldDisplay = checkAmenities(campResults[i]);
+    var shouldDisplay = checkAmenities(campResults[i]);
      console.log(shouldDisplay)
      console.log(amenitiesArray)
       if (shouldDisplay == true) {
@@ -120,10 +107,16 @@ function campground() {
         campsite.append(directionsButton, informationButton);
         $("#append-here").append(campsite);
         console.log(campResults)
-      }
+      } else if (shouldDisplay == false) {
+        console.log("in the else if")
+        var errorDiv = $("<div class='col-md-12' id='error-message'>");
+        errorDiv.append("<h3 class='row container-fluid bg-light text-primary mx-auto text-center justify-content-center border border-right-0 border-left-0 border-primary rounded'> Sorry, no campgrounds match your parameters. Please search again. </h3>");
+        $("#append-here").append(errorDiv);
+        return;
+      } 
     } 
   });
-
+};
   
 // This function takes campResults[i] defined as campGroundObject and confirms that both the amenitiesArray and the campResults array include the user's search parameters. If they don't BOTH include a chosen amenity then this will return false and filter that campground out.
 function checkAmenities(campGroundObject) {
@@ -132,11 +125,9 @@ function checkAmenities(campGroundObject) {
   if ((amenitiesArray.includes("showers") && !campGroundObject.amenities.showers[0].toLowerCase().includes("yes - seasonal")) &&    (amenitiesArray.includes("showers") && !campGroundObject.amenities.showers[0].toLowerCase().includes("yes - year round"))) {
     return false;
   } 
-  
   if ((amenitiesArray.includes("toilets") && !campGroundObject.amenities.toilets[0].toLowerCase().includes("flush toilets - seasonal")) && (amenitiesArray.includes("toilets") && !campGroundObject.amenities.toilets[0].toLowerCase().includes("flush toilets - year round") ) && (amenitiesArray.includes("toilets") && !campGroundObject.amenities.toilets[0].toLowerCase().includes("vault toilets - year round"))) {
     return false;
   } 
-  
   if (amenitiesArray.includes("trash") && !campGroundObject.amenities.trashrecyclingcollection.includes("Yes")) {
     return false;
   }
@@ -151,7 +142,7 @@ function checkAmenities(campGroundObject) {
   } else {
     return true;
   }
-}
+};
 
 // Reset button to clear current search results and form input fields/checkboxes
 $("#reset").on("click", function() {
@@ -162,7 +153,6 @@ $("#reset").on("click", function() {
   }); 
   $(".custom-control-input").attr("data-check", "false");
   $("#display-campsites").hide();
-  
 });
 
 
@@ -182,7 +172,6 @@ function getWeather(parkLatLong) {
   var latLongString = '/' + latLongArray[1] + "," + latLongArray[3];
   var darkskyKey = "24ad87e96d744bd3fb31284ccc8763a1"
   var weatherUrl = "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/" + darkskyKey + latLongString;
-
   // clear out values
   //$('#location').val('');
   for(var i = 0; i < dateRange +1; i++){
@@ -226,4 +215,3 @@ if(day < 10)
 var minDate = year + '-' + month + '-' + day;
 $(".date").attr("min", minDate);
 
-}
