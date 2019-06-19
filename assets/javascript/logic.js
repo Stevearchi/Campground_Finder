@@ -4,6 +4,17 @@ window.onload = function() {
   $(".weather-header").hide();
 };
 
+function reset() {
+  // $("#append-here").empty();
+  $("input").val("");
+  $('input[type=checkbox]').each(function() { 
+      this.checked = false; 
+  }); 
+  amenitiesArray = [];
+  $(".custom-control-input").attr("data-check", "false");
+  // $("#display-campsites").hide();
+  
+};
 // User selections will be pushed to this array
 var amenitiesArray = [];
 
@@ -59,6 +70,7 @@ $("#submit").on("click", function (event) {
     campground();
     getWeather(parkLatLong);
   })
+  reset();
 
 });
 
@@ -74,8 +86,9 @@ function campground() {
     url: campgroundUrl,
     method: "GET"
   }).then(function (response) {
-    console.log(response)
+    $("#append-here").empty();
     var campResults = response.data;
+    console.log(campResults)
     for (var i = 0; i < campResults.length; i++) {
       $("#display-campsites").show();
       
@@ -84,25 +97,12 @@ function campground() {
       var campgroundDescription = campResults[i].description;
       var campgroundInfoUrl = campResults[i].regulationsurl;
       var campgroundDirections = campResults[i].directionsUrl;
-      if (campgroundInfoUrl === "") {
-        var informationButton = $("<a id='dynamic-button' href='https://www.nps.gov/" + parkCode + "/planyourvisit/camping-regulations.htm' target='_blank'> Information </a>").addClass("btn btn-primary");
-      } else {
-         informationButton = $("<a id='dynamic-button' href=" + campgroundInfoUrl + " target='_blank'> Information </a>").addClass("btn btn-primary");
-      }
-      if (campgroundDirections === "") {
-        var directionsButton = $("<a id='dynamic-button' href='https://www.nps.gov/" + parkCode + "/planyourvisit/directions.htm' target='_blank'> Directions </a>").addClass("btn btn-primary");
-      } else {
-         directionsButton = $("<a id='dynamic-button' href=" + campgroundDirections + " target='_blank'> Directions </a>").addClass("btn btn-primary");
-      }
-      var campsite = $("<div>").addClass("ajaxResponse col-md-12 border-bottom border-primary");
- 
-    // if we decide we want to either offer a link (if its unique), or offer nothing, we would just adjust the logic in lines 86-95 above
+
     
 
       // This variable stores the result of the checkAmenities function, which will be a true or false (Boolean)
       var shouldDisplay = checkAmenities(campResults[i]);
-     console.log(shouldDisplay)
-     console.log(amenitiesArray)
+      
       if (shouldDisplay == true) {
         if (campgroundInfoUrl === "") {
           var informationButton = $("<a id='dynamic-button' href='https://www.nps.gov/" + parkCode + "/planyourvisit/index.htm' target='_blank'> Information </a>").addClass("btn btn-primary");
@@ -120,6 +120,9 @@ function campground() {
         campsite.append(directionsButton, informationButton);
         $("#append-here").append(campsite);
         console.log(campResults)
+      } else if (shouldDisplay == false) {
+        console.log("in the else if")
+        return $("#append-here").append("<h3 class='row container-fluid bg-light text-primary mx-auto justify-content-center border border-right-0 border-left-0 border-primary rounded'> Sorry, no campgrounds match your parameters, please search again </h3>")
       }
     } 
   });
@@ -127,13 +130,13 @@ function campground() {
   
 // This function takes campResults[i] defined as campGroundObject and confirms that both the amenitiesArray and the campResults array include the user's search parameters. If they don't BOTH include a chosen amenity then this will return false and filter that campground out.
 function checkAmenities(campGroundObject) {
-
+  console.log("toilets array", campGroundObject.amenities.toilets)
   
-  if ((amenitiesArray.includes("showers") && !campGroundObject.amenities.showers[0].toLowerCase().includes("yes - seasonal")) &&    (amenitiesArray.includes("showers") && !campGroundObject.amenities.showers[0].toLowerCase().includes("yes - year round"))) {
+  if (campGroundObject.amenities.showers[0] === "None" || (amenitiesArray.includes("showers") && !campGroundObject.amenities.showers[0].toLowerCase().includes("yes - seasonal")) && (amenitiesArray.includes("showers") && !campGroundObject.amenities.showers[0].toLowerCase().includes("yes - year round"))) {
     return false;
   } 
   
-  if ((amenitiesArray.includes("toilets") && !campGroundObject.amenities.toilets[0].toLowerCase().includes("flush toilets - seasonal")) && (amenitiesArray.includes("toilets") && !campGroundObject.amenities.toilets[0].toLowerCase().includes("flush toilets - year round") ) && (amenitiesArray.includes("toilets") && !campGroundObject.amenities.toilets[0].toLowerCase().includes("vault toilets - year round"))) {
+  if (campGroundObject.amenities.toilets.length == 0 || (amenitiesArray.includes("toilets") && !campGroundObject.amenities.toilets[0].includes("Flush Toilets - seasonal")) && (amenitiesArray.includes("toilets") && !campGroundObject.amenities.toilets[0].includes("Flush Toilets - year round") ) && (amenitiesArray.includes("toilets") && !campGroundObject.amenities.toilets[0].includes("Vault Toilets - year round"))) {
     return false;
   } 
   
@@ -154,16 +157,16 @@ function checkAmenities(campGroundObject) {
 }
 
 // Reset button to clear current search results and form input fields/checkboxes
-$("#reset").on("click", function() {
+function reset() {
   $("#append-here").empty();
   $("input").val("");
   $('input[type=checkbox]').each(function() { 
       this.checked = false; 
   }); 
   $(".custom-control-input").attr("data-check", "false");
-  $("#display-campsites").hide();
+  // $("#display-campsites").hide();
   
-});
+};
 
 
 // Function to get and display aspects of weather forecast for dates selected by user
