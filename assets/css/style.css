@@ -62,6 +62,14 @@ col-form-label-sm ::placeholder {
     font-size: 12px;
 }
 
+ul {
+  padding-top: 8px;
+}
+
+li {
+  text-align: left;
+}
+
 .weather p {
     margin: 0 auto;
     padding: 3px;
