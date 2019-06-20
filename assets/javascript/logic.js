@@ -6,8 +6,8 @@ window.onload = function() {
 var amenitiesArray = [];
 
 // Wiring up checkboxes in search form
-$(".custom-control-input").on("click", function() {
-  // console.log($(this).attr("data-check"));
+$(".custom-control-input").on("click", function () {
+
   if ($(this).attr("data-check") === "false") {
     $(this).attr("data-check", "true");
   } else {
@@ -61,7 +61,6 @@ $("#submit").on("click", function(event) {
 
 // Function to get and display campgrounds meeting the search parameters
 function campground() {
-  //console.log('in campground');
 
   var campgroundUrl =
     "https://developer.nps.gov/api/v1/campgrounds?api_key=IvDm5VJctJF8OHMsxVyrHXjVShQNgrTwYSbzQrYJ&parkCode=" +
@@ -216,7 +215,7 @@ function checkAmenities(campGroundObject) {
 };
 
 // Reset button to clear current search results and form input fields/checkboxes
-$("#reset").on("click", function() {
+$("#reset").on("click", function () {
   $("#append-here").empty();
   $("input").val("");
   $("input[type=checkbox]").each(function() {
@@ -236,46 +235,41 @@ function getWeather(parkLatLong) {
     .trim();
   var startMoment = moment(startDate, "YYYY-MM-DD");
 
-  var endDate = $("#end-date")
-    .val()
-    .trim();
-  var endMoment = moment(endDate, "YYYY-MM-DD");
-  startMoment.format("MM/DD/YYYY");
-  endMoment.format("MM/DD/YYYY");
-  var dateRange = endMoment.diff(startMoment, "days");
-  var latLongString = "/" + latLongArray[1] + "," + latLongArray[3];
-  var darkskyKey = "24ad87e96d744bd3fb31284ccc8763a1";
-  var weatherUrl =
-    "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/" +
-    darkskyKey +
-    latLongString;
-
+  var endDate = $('#end-date').val().trim();
+  var endMoment = moment(endDate, 'YYYY-MM-DD');
+  // startMoment.format('MM/DD/YYYY');
+  // endMoment.format('MM/DD/YYYY');
+  var dateRange = endMoment.diff(startMoment, 'days');
+  var latLongString = '/' + latLongArray[1] + "," + latLongArray[3];
+  var darkskyKey = "24ad87e96d744bd3fb31284ccc8763a1"
+  var weatherUrl = "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/" + darkskyKey + latLongString;
+  var currentMoment = startMoment;
   // clear out values
   //$('#location').val('');
+  currentMoment.subtract(7, 'days');
   for (var i = 0; i < dateRange + 1; i++) {
-    console.log(startMoment.add(i, "days").format("X")); //.calendar());
+    currentMoment = startMoment;
+    var ajaxMoment = startMoment;
 
-    // console.log(startMoment.clone().add(i, 'days'))
     $.ajax({
-      method: "GET",
-      url: weatherUrl + "," + startMoment.add(i, "days").format("X")
-    }).then(function(response) {
-      var high = response.daily.data[0].temperatureHigh;
-      var low = response.daily.data[0].temperatureLow;
-      var precip = response.daily.data[0].precipProbability;
-      var wind = response.daily.data[0].windSpeed;
+      method: 'GET',
+      url: weatherUrl + ',' + ajaxMoment.add(i, 'days').format('X')
+    }).then(function (response) {
 
-      // starting to think through getting this in the HTML - the formatting will be a little tough due to nested rows and columns. Will try to simplify tomorrow 6/19 - Carolyn
-      // $(".weather-header").show();
-      // var newRow = $("<div>").addClass("col-md-6 border border-primary weather");
-      // var nestedCol =
-      // var nestedRow =
+      currentMoment.add(1, 'days');
+      high = response.daily.data[0].temperatureHigh;
+      low = response.daily.data[0].temperatureLow;
+      precip = response.daily.data[0].precipProbability;
+      wind = response.daily.data[0].windSpeed;
+    
+      renderWeather(currentMoment, high, low, precip, wind);
+    
+    }); // .then
 
-      // $("#append-weather-here").append("");
-    });
-    startMoment.subtract(i, "days");
+    // startMoment.subtract(i, 'days');
   }
 }
+
 
 // Datepicker to allow only current and future date selections by user //
 var today = new Date();
@@ -287,3 +281,37 @@ if (day < 10) day = "0" + day.toString();
 
 var minDate = year + "-" + month + "-" + day;
 $(".date").attr("min", minDate);
+
+function renderWeather(currentMoment, high, low, precip, wind) {
+  
+ 
+  ulHigh = $("<li>").text('Hi: ' + Math.round(high) + '°');
+  ulLow = $("<li>").text('Lo: ' + Math.round(low) + '°');
+  ulPrecip = $("<li>").text('Precip: ' + Math.round(precip * 100) + '%');
+  ulWind = $("<li>").text('Wind: ' + wind + ' MPH');
+  var nestedCol = $("<div>").addClass("col-md-6 border border-primary weather");
+  var nesteddiv = $('<div>').addClass('row text-primary text-center');
+  var nested2ndcol = $('<div>').addClass('col-md-12 bg-white border-bottom border-primary');
+  //  <p id = 'date'>MM/DD</p>
+ 
+  var nestedP = $("<p>" + currentMoment.format('MM/DD/YY') + "</p>") //.attr("id", 'date').text('MM/DD');
+
+  var weatherdiv = $("<div>").addClass("row weather");
+  var weather2nddiv = $("<div>").addClass('col-md-12');
+  var list = $("<ul>");
+
+
+
+  weatherdiv.append(weather2nddiv)
+  nestedP.append(weatherdiv)
+  nested2ndcol.append(nestedP)
+  nesteddiv.append(nested2ndcol)
+  nestedCol.append(nesteddiv)
+  list.append(ulHigh)
+  list.append(ulLow)
+  list.append(ulPrecip)
+  list.append(ulWind)
+  weather2nddiv.append(list)
+  $("#append-weather-here").append(nestedCol);
+  $(".weather-header").show();
+}
