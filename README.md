@@ -19,3 +19,4 @@ Steve and Charlie were responsible for setting up our APIs and AJAX querries.
 Charlie focused on the national park side, and Steve focused on the weather functionality. For the campgrounds, we had to utilize two NPS api’s, one to take in the name of a national park that spits out an NPS-unique park code, and the second to take in the national park code and spit out all the campgrounds that exist in that park.  
 
 Steve took the location information return from the first NPS ajax call and plugged the latitude and longitude from that response into the dark skies API to get our weather information. He also had to utilize moment.js to convert our date and time formats into workable data.
+
