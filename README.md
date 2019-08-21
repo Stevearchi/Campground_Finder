@@ -1,4 +1,4 @@
-# project_1
+# Park it! (Campground Finder)
 
 Description: 
 We created an app that allows the user to search for campgrounds inside national parks.  We have provided six different amenities that we thought would be helpful. We are also linking weather data that is derived from the location of the national park and the dates provided by the user.
